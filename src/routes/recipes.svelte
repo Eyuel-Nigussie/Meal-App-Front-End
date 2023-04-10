@@ -1,4 +1,4 @@
-	<div class="w-full rounded-xl border border-gray-200 bg-white py-4 px-2 shadow-md shadow-gray-100">
+	<div class="w-full hidden:lg rounded-xl border border-gray-200 bg-white py-4 px-2 shadow-md shadow-gray-100">
 		<div class="flex items-center justify-between px-2 py-8 font-large text-black">
 			<div class="text-2xl py-lg">Recipes</div>
 			<div>
