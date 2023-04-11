@@ -10,6 +10,7 @@
   import Preference from './routes/preference.svelte'
   import Restrictioins from './routes/restrictions.svelte'
   import Profile from './routes/profile.svelte'
+  import Register from './routes/registration.svelte'
   import NotFound from './routes/notfound.svelte'
   import Fetch from './routes/fetchPractice.svelte'
   import Router from 'svelte-spa-router' 
@@ -18,6 +19,7 @@ let routes = {
   "/": Home,
   "/recipes": Recipes,
   "/login": Login,
+  '/register': Register,
   "/dashboard": Dashboard,
   "/preference": Preference,
   "/restirctions": Restrictioins,
