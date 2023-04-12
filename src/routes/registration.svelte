@@ -2,16 +2,16 @@
    import axios from 'axios';
    import {push} from 'svelte-spa-router'
 
-   let name = '', email = '', password;
+   let name = '', email = '', password = '';
 
    $: submit = async () => {
-    await axios.post('',{
+    await axios.post('http://127.0.0.1:8000/users/',{
       name: name,
       email: email,
       password: password
     }),
-
-    await push('/login');
+    // if successful redirect to login page
+    await push('/#/login');
    }
 </script>
  
@@ -23,24 +23,29 @@
         <h2 class="text-center text-3xl font-bold tracking-tight text-gray-900">Sign Up to your account</h2>
         <p class="mt-2 text-center text-sm text-gray-600">
           Or
+               <!-- svelte-ignore a11y-invalid-attribute -->
           <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">start your 14-day free trial</a>
         </p>
       </div>
-      <form class="space-y-6" action="#" method="POST">
+      <form class="space-y-6" on:submit|preventDefault={submit}>
         <input type="hidden" name="remember" value="true">
         <div class="rounded-md shadow-sm">
           <div class="my-4">
                 <label for="name" class="sr-only">Name</label>
                 <input bind:value={name} id="name" name="name" type="text" autocomplete="name" required class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Name">
-                <h6>{name}</h6>
+                <h2>{name}</h2>
          </div>
           <div class="my-4">
                 <label for="email-address" class="sr-only">Email address</label>
-                <input id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full rounded-t-md border-0 py-1.5 my-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Email address">
-          </div>
+                <input bind:value={email} id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full rounded-t-md border-0 py-1.5 my-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Email address">
+                <h2>email</h2>
+                <h2>{email}</h2>
+         </div>
           <div class="my-4">
                 <label for="password" class="sr-only">Password</label>
-                <input bind:value={email} id="password" name="password" type="password" autocomplete="current-password" required class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Password">
+                <input bind:value={password} id="password" name="password" type="password" autocomplete="current-password" required class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Password">
+                <h2>Password</h2>
+                <h2>{password}</h2>
           </div>
           
         </div>
@@ -52,6 +57,7 @@
           </div>
   
           <div class="text-sm">
+            <!-- svelte-ignore a11y-invalid-attribute -->
             <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Forgot your password?</a>
           </div>
         </div>
