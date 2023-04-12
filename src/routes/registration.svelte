@@ -1,6 +1,6 @@
 <script>
    import axios from 'axios';
-   import {push} from 'svelte-spa-router  '
+   import {push} from 'svelte-spa-router'
 
    let name = '', email = '', password;
 
