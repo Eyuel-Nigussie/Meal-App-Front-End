@@ -11,7 +11,7 @@
       password: password
     }),
     // if successful redirect to login page
-    await push('/#/login');
+    await push('/login');
    }
 </script>
  
