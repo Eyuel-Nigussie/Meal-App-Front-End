@@ -37,7 +37,7 @@
     }
     monthIndex--
   } 
-  $: console.log(monthIndex);
+
 </script>
 
 <!-- svelte-ignore a11y-missing-attribute -->
@@ -69,8 +69,9 @@
       {#if i < firstDayIndex || i >= numberOfDays+firstDayIndex}
         <li>&nbsp;</li>
       {:else}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <li class:active={ i == today.dayNumber+(firstDayIndex-1) && monthIndex === today.month &&
-        year === today.year} on:click>{(i-firstDayIndex+1)}</li>
+        year === today.year} on:click data-dateID={`${month}_${i-firstDayIndex+1}_${year}`}>{(i-firstDayIndex+1)}</li>
       {/if}
     <!-- <li><span class="active">10</span></li>  -->
     {/each}
@@ -78,7 +79,7 @@
 </div>
 
 <style>
-  * {box-sizing: border-box;}
+  * {box-sizing: border-box;} 
   ul {list-style-type: none;}
   
   .month {
