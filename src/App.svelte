@@ -12,7 +12,7 @@
   import Restrictioins from './routes/restrictions.svelte'
   import Profile from './routes/profile.svelte'
   import Register from './routes/registration.svelte'
-  import Calendar from './routes/calendar.svelte'
+  import Planner from './routes/planner.svelte'
   import NotFound from './routes/notfound.svelte'
   import Fetch from './routes/fetchPractice.svelte'
   import Router from 'svelte-spa-router' 
@@ -27,7 +27,7 @@ let routes = {
   "/preference": Preference,
   "/restirctions": Restrictioins,
   "/profile": Profile,
-  "/calendar": Calendar,
+  "/planner": Planner,
   "/fetch": Fetch,
   "*": NotFound
 }
