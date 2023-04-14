@@ -17,12 +17,19 @@
         dateID = e.target.dataset.dateid
         makeDateHeading()
     }
+
+    const setApptToSch = (e) =>{
+        console.log(e.detail)
+    }
 </script>
 
 <section>
     <Calendar on:click={handleScheduler}/>
     {#if schedulerShowing}
-       <Schedule on:click={() => schedulerShowing = false } {dateID} {dateHeading}/>
+       <Schedule on:modalClose  ={() => schedulerShowing = false }
+        on:addAppt={setApptToSch}
+         {dateID}
+         {dateHeading} />
     {/if}
 </section>
 
