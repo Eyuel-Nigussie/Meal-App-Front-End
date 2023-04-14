@@ -1,12 +1,29 @@
 <script >
+    import { createEventDispatcher} from 'svelte'
     export let dateID;
     export let dateHeading;
+
+    const dispatch = createEventDispatcher();   
+
+    let apptDetails = {
+        mealType: "",
+        meal: ""   
+    }
+
+    const submitAppt = () => {
+        dispatch('addAppt', apptDetails)
+        //reset 
+        apptDetails = {
+            mealType: "",
+            meal: ""   
+        }
+    }
 </script>
 
 <section>
-  <form id={dateID}>
+  <form id={dateID} on:submit|preventDefault={submitAppt}>
     <div>
-        <span class="close" title="Close Modal" on:click>
+        <span class="close" title="Close Modal" on:click={() => dispatch('modalClose')}>
             &times;
         </span>
     </div>
@@ -14,24 +31,27 @@
         <h2>Meal Planner</h2>
         <h2>{dateHeading}</h2>
         
-<label for="small" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Small select</label>
-<select id="small" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-  <option selected>Choose Meal Type</option>
-  <option value="US">Breakfast</option>
-  <option value="CA">Lunch</option>
-  <option value="FR">Dinner</option>
-  <option value="DE">Supper</option>
-</select>
-<label for="large" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Large select</label>
-<select id="large" class="block w-full px-4 py-3 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-  <option selected>Choose a country</option>
-  <option value="US">Kitfo</option>
-  <option value="CA">Tibes</option>
-  <option value="FR">Burger</option>
-  <option value="DE">choma</option>
-</select>
+            <label for="small" class="block mb-2 text-sm font-large text-gray-900 dark:text-white">Small select</label>
+            <select bind:value={apptDetails.mealType} id="small" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected>Choose Meal Type</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Supper">Supper</option>
+            </select>
+            {apptDetails.mealType}
+            <label for="large" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Large select</label>
+            <select bind:value={apptDetails.meal} id="large" class="block w-full px-4 py-3 mb-6 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected>Choose a country</option>
+            <option value="Kitfo">Kitfo</option>
+            <option value="Tibes">Tibes</option>
+            <option value="Burger">Burger</option>
+            <option value="choma">choma</option>
+            </select>
 
-        <span onclick="newElement()" class="addBtn">Add</span>
+            <div>
+				<button class="addBtn">Add</button>
+			</div>	
     </div>
       
       <ul id="myUL">
