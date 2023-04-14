@@ -70,7 +70,7 @@
         <li>&nbsp;</li>
       {:else}
         <li class:active={ i == today.dayNumber+(firstDayIndex-1) && monthIndex === today.month &&
-        year === today.year} >{(i-firstDayIndex+1)}</li>
+        year === today.year} on:click>{(i-firstDayIndex+1)}</li>
       {/if}
     <!-- <li><span class="active">10</span></li>  -->
     {/each}
