@@ -1,8 +1,10 @@
 <script >
-
+    export let dateID;
+    export let dateHeading;
 </script>
 
 <section>
+  <form id={dateID}>
     <div>
         <span class="close" title="Close Modal" on:click>
             &times;
@@ -10,8 +12,25 @@
     </div>
     <div id="myDIV" class="header">
         <h2>Meal Planner</h2>
-        <h2>April 14, 2023</h2>
-        <input type="text" id="myInput" placeholder="Title...">
+        <h2>{dateHeading}</h2>
+        
+<label for="small" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Small select</label>
+<select id="small" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+  <option selected>Choose Meal Type</option>
+  <option value="US">Breakfast</option>
+  <option value="CA">Lunch</option>
+  <option value="FR">Dinner</option>
+  <option value="DE">Supper</option>
+</select>
+<label for="large" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Large select</label>
+<select id="large" class="block w-full px-4 py-3 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+  <option selected>Choose a country</option>
+  <option value="US">Kitfo</option>
+  <option value="CA">Tibes</option>
+  <option value="FR">Burger</option>
+  <option value="DE">choma</option>
+</select>
+
         <span onclick="newElement()" class="addBtn">Add</span>
     </div>
       
@@ -23,6 +42,7 @@
         <li>Read a book</li>
         <li>Organize office</li>
       </ul> 
+  </form>
 </section>
 
 <style>
