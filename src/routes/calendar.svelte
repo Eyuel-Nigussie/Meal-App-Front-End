@@ -21,7 +21,7 @@
 
   let currentDay =  date.getDate();
 
-  $: calendarCellsQty = firstDayIndex <= 4 ? 35 : 42;
+  let calendarCellsQty = firstDayIndex <= 4 ? 35 : 42;
 
   const goToNextMonth = () => {
     if(monthIndex >= 11){
