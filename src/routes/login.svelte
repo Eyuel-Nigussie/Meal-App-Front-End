@@ -1,17 +1,31 @@
 <script>
   import axios from 'axios';
   import {push} from 'svelte-spa-router'
+  import Cookies from 'js-cookie'
 
-  let name = '', email = '', password;
+  Cookies.set('auth', 'my-auth-token', { sameSite: "None", secure: true})
+
+  let username = '', password = '';
 
   $: submit = async () => {
-   await axios.post('',{
-     name: name,
-     email: email,
-     password: password
-   }),
+   const response = await axios.post('http://127.0.0.1:8000/login',{
+    username: username,
+    password: password
+   },{
+     headers: {
+       'Content-Type': 'application/json'
+     }
+   });
+  
+   if(response.status == 200){
+      // axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+      console.log('200 yeah man')
+      // await push('/');
+   }  
+   else if( response.status == 422 ){
+    console.log('422 oh men')
+   }
 
-   await push('/login');
   }
 </script>
 
@@ -23,19 +37,24 @@
        <h2 class="text-center text-3xl font-bold tracking-tight text-gray-900">Sign In to your account</h2>
        <p class="mt-2 text-center text-sm text-gray-600">
          Or
-         <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">start your 14-day free trial</a>
+              <!-- svelte-ignore a11y-invalid-attribute -->
+         <a href="/#/register" class="font-medium text-indigo-600 hover:text-indigo-500">Click here to Sign UP</a>
        </p>
      </div>
-     <form class="space-y-6" action="#" method="POST">
+     <form class="space-y-6" on:submit|preventDefault={submit}>
        <input type="hidden" name="remember" value="true">
        <div class="rounded-md shadow-sm">
          <div class="my-4">
                <label for="email-address" class="sr-only">Email address</label>
-               <input id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full rounded-t-md border-0 py-1.5 my-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Email address">
-         </div>
+               <input bind:value={username} id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full rounded-t-md border-0 py-1.5 my-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Email address">
+               <h2>email</h2>
+               <h2>{username}</h2>
+        </div>
          <div class="my-4">
                <label for="password" class="sr-only">Password</label>
-               <input bind:value={email} id="password" name="password" type="password" autocomplete="current-password" required class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Password">
+               <input bind:value={password} id="password" name="password" type="password" autocomplete="current-password" required class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Password">
+               <h2>Password</h2>
+               <h2>{password}</h2>
          </div>
          
        </div>
@@ -47,6 +66,7 @@
          </div>
  
          <div class="text-sm">
+           <!-- svelte-ignore a11y-invalid-attribute -->
            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Forgot your password?</a>
          </div>
        </div>
@@ -58,7 +78,7 @@
                <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
              </svg>
            </span>
-           Sign In
+           Sign IN
          </button>
        </div>
      </form>
