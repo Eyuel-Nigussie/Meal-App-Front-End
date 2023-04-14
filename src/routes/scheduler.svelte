@@ -3,11 +3,16 @@
 </script>
 
 <section>
+    <div>
+        <span class="close" title="Close Modal" on:click>
+            &times;
+        </span>
+    </div>
     <div id="myDIV" class="header">
         <h2>My To Do List</h2>
         <input type="text" id="myInput" placeholder="Title...">
         <span onclick="newElement()" class="addBtn">Add</span>
-      </div>
+    </div>
       
       <ul id="myUL">
         <li>Hit the gym</li>
@@ -23,6 +28,16 @@
     /* Include the padding and border in an element's total width and height */
 * {
   box-sizing: border-box;
+}
+
+section{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: white;
 }
 
 /* Remove margins and padding from the list */
@@ -94,7 +109,7 @@ ul li.checked::before {
 /* Style the header */
 .header {
   background-color: #f44336;
-  padding: 30px 40px;
+  padding: 80px 40px;
   color: white;
   text-align: center;
 }
@@ -134,4 +149,17 @@ input {
 .addBtn:hover {
   background-color: #bbb;
 }
+
+.close{
+    position: absolute;
+    font-size: 2rem;
+    color: white;
+    right: 0;
+    top: 0;
+    padding: 0px 16px 12px 16px;
+    cursor: pointer;
+ }
+ .close:hover{
+    background-color: hsla(0, 85%, 66%, 0.234);
+ }
 </style>
