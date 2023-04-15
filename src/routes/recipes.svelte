@@ -1,17 +1,16 @@
 	<div class="w-full hidden:lg rounded-xl border border-gray-200 bg-white py-4 px-2 shadow-md shadow-gray-100">
-		<div class="flex items-center justify-between px-2 py-8 font-large text-black">
+		<div class="flex items-center justify-between px-2  font-large text-black">
 			<div class="text-2xl py-lg">Recipes</div>
-			<div>
+			<!-- <div>
 				<button class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-black">
           <svg class="h-5 w-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
         </button>
-			</div>
+			</div> -->
 		</div>
 
     <!-- ============ Header =================================== -->
-
 			<div class="flex max-h-[100vh] w-full flex-col overflow-y-scroll">
 				<button class="group flex items-center gap-x-5 rounded-md px-2.5 py-2 transition-all duration-75 hover:bg-green-100">
           <div class="container ">
