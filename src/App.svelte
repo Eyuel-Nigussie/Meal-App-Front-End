@@ -14,6 +14,7 @@
   import Profile from './routes/profile.svelte'
   import Register from './routes/registration.svelte'
   import Planner from './routes/planner.svelte'
+  import About from './routes/about.svelte'
   import NotFound from './routes/notfound.svelte'
   import Fetch from './routes/fetchPractice.svelte'
   import Router from 'svelte-spa-router' 
@@ -30,6 +31,7 @@ let routes = {
   "/profile": Profile,
   "/planner": Planner,
   "/fetch": Fetch,
+  "/about": About,
   "*": NotFound
 }
 
@@ -44,8 +46,8 @@ let routes = {
   <Router {routes} />
 </main>
 
-<footer>
-    <div class="fixed mb-[-18px] p-0 z-50 w-full h-16 max-w-xl -translate-x-1/2 bg-gradient-to-r from-white  from-1% via-red-600 via-50% to-red-3 00 to-1% border border-gray-200 rounded-lg bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600">
+<footer class="md:hidden">
+    <div class="fixed mb-[-18px] p-0 z-50 w-full h-16 max-w-xl -translate-x-1/2 bg-gradient-to-r from-white  from-1% via-slate-600 via-50% to-red-3 00 to-1% border border-gray-200 rounded-lg bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600">
         <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
             
           <button data-tooltip-target="tooltip-home" type="button" class="inline-flex flex-col items-center justify-center px-5 rounded-l-full hover:bg-gray-50 dark:hover:bg-gray-800 group">

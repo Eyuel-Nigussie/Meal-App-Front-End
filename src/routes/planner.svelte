@@ -2,6 +2,13 @@
     import Calendar from  './calendar.svelte'
     import Schedule from './scheduler.svelte'
 
+    let schedule = {
+        May_31_2021: [
+            {id: 7362342, mealType: "breakfast", meal: "Kurt", time: "8:00am", completed: false},
+            
+        ]
+    };
+
     let schedulerShowing = false;
     let dateID; // to store the id of the date
     let dateHeading;
@@ -19,10 +26,28 @@
     }
 
     const setApptToSch = (e) =>{
-        console.log(e.detail)
+        // console.log(e.detail)
         let time = `${e.detail.hour}:${e.detail.minutes < 10 ? '0' + e.detail.minutes : e.detail.minutes}${e.detail.amOrPM}`
-        console.log(time)
+        // console.log(time)
+
+        let newAppt = {
+            id: Math.floor(Math.random() * 1000000),
+            mealType: e.detail.mealType,
+            meal: e.detail.meal,
+            time,
+            complete: e.detail.completed
+        }
+
+        if (!schedule[dateID]){
+            schedule[dateID] = [newAppt]
+        }
+        else{
+            let currSchedAppts = schedule[dateID];
+            schedule[dateID] = [...currSchedAppts, newAppt]
+        }
+
     }
+$: console.log(schedule)
 </script>
 
 <section>

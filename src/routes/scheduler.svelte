@@ -36,6 +36,7 @@
     <div id="myDIV" class="header">
         <h2>Meal Planner</h2>
         <h2>{dateHeading}</h2>
+        
             <label for="small" class="block mb-2 text-sm font-large text-gray-900 dark:text-white">Small select</label>
             <select bind:value={apptDetails.mealType} id="small" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option selected>Choose Meal Type</option>
@@ -68,7 +69,7 @@
         <li>Organize office</li>
       </ul> 
   </form>
-</section> http://localhost:5173/ h ttp://localhost:5173/http://localhost:5173/http://localhost:5173/ http://localhost:5173/ttp://localhost:5173/ http://localhost:5173/ http://localhost:5173/
+</section>
 
 <style>
     /* Include the padding and border in an element's total width and height */
