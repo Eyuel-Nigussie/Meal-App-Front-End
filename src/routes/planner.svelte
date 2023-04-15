@@ -20,6 +20,8 @@
 
     const setApptToSch = (e) =>{
         console.log(e.detail)
+        let time = `${e.detail.hour}:${e.detail.minutes < 10 ? '0' + e.detail.minutes : e.detail.minutes}${e.detail.amOrPM}`
+        console.log(time)
     }
 </script>
 
