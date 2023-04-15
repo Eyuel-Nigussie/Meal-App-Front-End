@@ -6,8 +6,11 @@
     const dispatch = createEventDispatcher();   
 
     let apptDetails = {
-        mealType: "",
-        meal: ""   
+        mealType: "fo",
+        meal: "kit",
+        hour: "3",
+        amOrPM: "am",
+        completed: false   
     }
 
     const submitAppt = () => {
@@ -15,7 +18,10 @@
         //reset 
         apptDetails = {
             mealType: "",
-            meal: ""   
+            meal: "",
+            hour: "",
+            amOrPM: "",
+            completed: false   
         }
     }
 </script>
