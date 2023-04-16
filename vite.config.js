@@ -7,5 +7,10 @@ export default defineConfig({
   plugins: [svelte()],
   css:{
     postcss
+  },
+  // server:{
+  //   hmr:{
+  //     overlay:false
+  //   }
   }
 })
