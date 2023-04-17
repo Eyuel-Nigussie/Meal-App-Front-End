@@ -1,36 +1,53 @@
-<div class="flex items-center h-screen w-full justify-center">
+<div class="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg mx-auto">
+    <div class="px-4 py-5 sm:px-6">
+        <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">User <span class="text-red-600 dark:text-blue-500">Info</span></h1>  
 
-    <div class="max-w-xs">
-        <div class="bg-white shadow-xl rounded-lg py-3">
-            <div class="photo-wrapper p-2">
-                <img class="w-32 h-32 rounded-full mx-auto" src="https://www.gravatar.com/avatar/2acfb745ecf9d4dccb3364752d17f65f?s=260&d=mp" alt="John Doe">
-            </div>
-            <div class="p-2">
-                <h3 class="text-center text-xl text-gray-900 font-medium leading-8">Joh Doe</h3>
-                <div class="text-center text-gray-400 text-xs font-semibold">
-                    <p>Web Developer</p>
-                </div>
-                <table class="text-xs my-3">
-                    <tbody><tr>
-                        <td class="px-2 py-2 text-gray-500 font-semibold">Address</td>
-                        <td class="px-2 py-2">Chatakpur-3, Dhangadhi Kailali</td>
-                    </tr>
-                    <tr>
-                        <td class="px-2 py-2 text-gray-500 font-semibold">Phone</td>
-                        <td class="px-2 py-2">+977 9955221114</td>
-                    </tr>
-                    <tr>
-                        <td class="px-2 py-2 text-gray-500 font-semibold">Email</td>
-                        <td class="px-2 py-2">john@exmaple.com</td>
-                    </tr>
-                </tbody></table>
-    
-                <div class="text-center my-3">
-                    <a class="text-xs text-indigo-500 italic hover:underline hover:text-indigo-600 font-medium" href="#">View Profile</a>
-                </div>
-    
-            </div>
-        </div>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            Details and informations about user.
+        </p>
     </div>
-    
+    <div class="border-t border-gray-200">
+        <dl>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Full name
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    Mickael Poulaz
+                </dd>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Best techno
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    React JS
+                </dd>
+            </div>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Email address
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    m.poul@example.com
+                </dd>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Salary
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    $10,000
+                </dd>
+            </div>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    About
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    To get social media testimonials like these, keep your customers engaged with your social media accounts by posting regularly yourself
+                </dd>
+            </div>
+        </dl>
     </div>
+</div>
