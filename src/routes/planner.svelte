@@ -47,7 +47,7 @@ $: console.log(schedule)
 </script>
 
 <section>
-    <Calendar on:click={handleScheduler}/>
+    <Calendar on:click={handleScheduler} {schedule}/>
     {#if schedulerShowing}
        <Schedule on:modalClose  ={() => schedulerShowing = false }
         on:addAppt={setApptToSch}

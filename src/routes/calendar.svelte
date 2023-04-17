@@ -1,6 +1,8 @@
 <script>
   import { link } from "svelte-spa-router";
 
+  export let schedule;  
+
   const date = new Date();
 
   const today = {
@@ -71,7 +73,9 @@
       {:else}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <li class:active={ i == today.dayNumber+(firstDayIndex-1) && monthIndex === today.month &&
-        year === today.year} on:click data-dateID={`${month}_${i-firstDayIndex+1}_${year}`}>{(i-firstDayIndex+1)}</li>
+        year === today.year} on:click data-dateID={`${month}_${i-firstDayIndex+1}_${year}`}
+         class:has-appts={`${month}_${(i-firstDayIndex) + 1}_${year}` in schedule}>
+        {(i-firstDayIndex+1)}</li>
       {/if}
     <!-- <li><span class="active">10</span></li>  -->
     {/each}
@@ -161,7 +165,12 @@
   .active {
     padding: 5px;
     background: #4400005c;
-    color: white !important
+    color: white 
+  }
+
+  .days li.has-appts {
+    /* color: #ac0000; */
+    background-color: #ff242430;
   }
   
   /* Add media queries for smaller screens */
