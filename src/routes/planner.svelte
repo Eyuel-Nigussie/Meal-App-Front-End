@@ -1,9 +1,16 @@
 <script>
+    import { onDestroy } from 'svelte'
+    import {scheduleStore} from "../schedule-store"
     import Calendar from  './calendar.svelte'
     import Schedule from './scheduler.svelte'
-
     let schedule = {};
 
+    const unsubscribe = scheduleStore.subscribe(currDataState =>{
+        schedule = currDataState;
+    })
+    onDestroy(() => {
+       if(unsubscribe) unsubscribe();
+    })
     let schedulerShowing = false;
     let dateID; // to store the id of the date
     let dateHeading;
@@ -35,11 +42,17 @@
         }
 
         if (!schedule[dateID]){
-            schedule[dateID] = [newAppt]
+            scheduleStore.update(currDataState => {
+                currDataState[dateID] = [newAppt]
+                return currDataState;
+            })
         }
         else{
-            let currSchedAppts = schedule[dateID];
-            schedule[dateID] = [...currSchedAppts, newAppt]
+          scheduleStore.update(currDataState => {
+            let currSchedAppts = currDataState[dateID]
+            currDataState[dateID] = [...currSchedAppts, newAppt]
+            return currDataState;
+          })
         }
 
     }
