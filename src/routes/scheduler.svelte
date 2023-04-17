@@ -72,7 +72,7 @@
             <h1>No meal planed</h1>
           {:else}
             {#each appointments as appt}
-              <Appointment mealType={appt.mealType}, meal={appt.meal} time='Null' completed={appt.completed}  />
+              <Appointment mealType={appt.mealType}, meal={appt.meal} time='Null' completed={appt.completed} apptID={appt.id} {dateID}  />
             {/each}
           {/if}
             <!-- <Appointment /> -->
