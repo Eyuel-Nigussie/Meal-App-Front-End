@@ -1,8 +1,10 @@
 <script >
     import { createEventDispatcher} from 'svelte'
+    import Appointment from './Appointment.svelte'
     export let dateID;
     export let dateHeading;
-
+    export let appointments = [];
+    
     const dispatch = createEventDispatcher();   
 
     let apptDetails = {
@@ -24,6 +26,8 @@
             completed: false   
         }
     }
+
+    
 </script>
 
 <section>
@@ -60,14 +64,21 @@
 			</div>	
     </div>
       
-      <ul id="myUL">
-        <li>Hit the gym</li>
-        <li class="checked">Pay bills</li>
-        <li>Meet George</li>
-        <li>Buy eggs</li>
-        <li>Read a book</li>
-        <li>Organize office</li>
-      </ul> 
+     <!-- component -->
+<div class="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
+	<div class="bg-white rounded shadow p-6 m-4 w-full">
+        <div> 
+          {#if appointments.length == 0}
+            <h1>No meal planed</h1>
+          {:else}
+            {#each appointments as appt}
+              <Appointment mealType={appt.mealType}, meal={appt.meal} time='Null' completed={appt.completed}  />
+            {/each}
+          {/if}
+            <!-- <Appointment /> -->
+        </div>
+    </div>
+</div>
   </form>
 </section>
 
