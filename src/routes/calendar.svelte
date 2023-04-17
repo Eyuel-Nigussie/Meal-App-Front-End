@@ -80,12 +80,14 @@
 
 <style>
   * {box-sizing: border-box;} 
-  ul {list-style-type: none;}
+  ul {
+    list-style-type: none;
+  }
   
   .month {
     padding: 70px 25px;
     width: 100%;
-    background: #e92020;
+    background: #8b000076;
     text-align: center;
   }
   
@@ -95,8 +97,9 @@
   }
   
   .month ul li {
-    color: white;
-    font-size: 20px;
+    color: rgb(8, 8, 8);
+    font-size: 25px;
+    font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 3px;
   }
@@ -116,13 +119,14 @@
   .weekdays {
     margin: 0;
     padding: 10px 0;
-    background-color: #ddd;
+    background-color: #5b00003c;
+ 
   }
   
   .weekdays li {
     display: inline-block;
     width: 13.6%;
-    color: #666;
+    color: white;
     text-align: center;
   }
   
@@ -144,7 +148,7 @@
     padding-bottom: 10px; */
     list-style-type: none;
     display: inline-block;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding: 9px;
     width: 11.6%;
     text-align: center;
@@ -156,7 +160,7 @@
   
   .active {
     padding: 5px;
-    background: #e01f1f;
+    background: #4400005c;
     color: white !important
   }
   
