@@ -1,6 +1,6 @@
 	<div class="md:hidden w-full hidden:lg rounded-xl border border-gray-200 bg-white py-4 px-2 shadow-md shadow-gray-100">
 		<div class="flex items-center justify-between px-2  font-large text-black">
-			<div class="text-2xl py-lg">Recipes</div>
+      <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">My <span class="text-red-600 dark:text-blue-500">Recipes</span></h1>  
 			<!-- <div>
 				<button class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-black">
           <svg class="h-5 w-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -312,7 +312,8 @@
 		</div>
 
 <!-- ====== Cards Section Start -->
-<section class="bg-[#F3F4F6] pt-20 pb-10 lg:pt-[120px] lg:pb-20">
+<section class="bg-[#F3F4F6] pt-20 pb-10 mb-0 lg:pt-[120px] lg:pb-20">
+  <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">My <span class="text-red-600 dark:text-blue-500">Recipes</span></h1>  
   <div class="container mx-auto">
     <div class="flex flex-wrap">
       <div class="w-full px-4 md:w-1/2 xl:w-1/3">
@@ -337,7 +338,7 @@
             </p>
             <a
               href="javascript:void(0)"
-              class="text-body-color hover:border-primary hover:bg-primary inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
+              class="text-body-color hover:border-primary hover:bg-slate-800 inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
             >
               View Details
             </a>
@@ -366,7 +367,7 @@
             </p>
             <a
               href="javascript:void(0)"
-              class="text-body-color hover:border-primary hover:bg-primary inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
+              class="text-body-color hover:border-primary hover:bg-slate-800 inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
             >
               View Details
             </a>
@@ -395,7 +396,7 @@
             </p>
             <a
               href="javascript:void(0)"
-              class="text-body-color hover:border-primary hover:bg-primary inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
+              class="text-body-color hover:border-primary hover:bg-slate-800 inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
             >
               View Details
             </a>
@@ -424,7 +425,7 @@
             </p>
             <a
               href="javascript:void(0)"
-              class="text-body-color hover:border-primary hover:bg-primary inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
+              class="text-body-color hover:border-primary hover:bg-red-500 inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
             >
               View Details
             </a>
@@ -453,7 +454,7 @@
             </p>
             <a
               href="javascript:void(0)"
-              class="text-body-color hover:border-primary hover:bg-primary inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
+              class="text-body-color hover:border-primary hover:bg-slate-800 inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
             >
               View Details
             </a>
@@ -482,7 +483,7 @@
             </p>
             <a
               href="javascript:void(0)"
-              class="text-body-color hover:border-primary hover:bg-primary inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
+              class="text-body-color hover:border-primary hover:bg-slate-800 inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
             >
               View Details
             </a>

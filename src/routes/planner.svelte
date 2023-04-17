@@ -2,17 +2,13 @@
     import Calendar from  './calendar.svelte'
     import Schedule from './scheduler.svelte'
 
-    let schedule = {
-        May_31_2021: [
-            {id: 7362342, mealType: "breakfast", meal: "Kurt", time: "8:00am", completed: false},
-            
-        ]
-    };
+    let schedule = {};
 
     let schedulerShowing = false;
     let dateID; // to store the id of the date
     let dateHeading;
 
+    $: appointments = schedule[dateID]
     const makeDateHeading = () => {
         let dateAsHeading = dateID.replace(/_/g, " "); 
         const date = new Date(dateAsHeading)
@@ -56,7 +52,8 @@ $: console.log(schedule)
        <Schedule on:modalClose  ={() => schedulerShowing = false }
         on:addAppt={setApptToSch}
          {dateID}
-         {dateHeading} />
+         {dateHeading}
+         {appointments} />
     {/if}
 </section>
 
