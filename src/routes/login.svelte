@@ -11,13 +11,18 @@
     const formData = new FormData(); 
     formData.append('username', myusername); 
      formData.append('password', mypassword);
-     console.log(formData);
     await axios.post('http://127.0.0.1:8000/login', formData, {
      headers: {
        'Content-Type': 'multipart/form-data' 
       } 
     })
-       .then((response) => { console.log(response); }) 
+       .then(
+        (response) => { 
+                        localStorage.setItem('access_token', response.data.access_token);
+                        push('/profile');
+                      }
+        
+       ) 
        .catch((error) => { console.error(error); });
   }
 </script>
