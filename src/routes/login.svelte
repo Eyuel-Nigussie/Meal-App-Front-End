@@ -5,27 +5,20 @@
 
   Cookies.set('auth', 'my-auth-token', { sameSite: "None", secure: true})
 
-  let username = '', password = '';
+  let myusername = '', mypassword = '';
 
-  $: submit = async () => {
-   const response = await axios.post('http://127.0.0.1:8000/login',{
-    username: username,
-    password: password
-   },{
+  const submit = async () => {
+    const formData = new FormData(); 
+    formData.append('username', myusername); 
+     formData.append('password', mypassword);
+     console.log(formData);
+    await axios.post('http://127.0.0.1:8000/login', formData, {
      headers: {
-       'Content-Type': 'application/json'
-     }
-   });
-  
-   if(response.status == 200){
-      // axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-      console.log('200 yeah man')
-      // await push('/');
-   }  
-   else if( response.status == 422 ){
-    console.log('422 oh men')
-   }
-
+       'Content-Type': 'multipart/form-data' 
+      } 
+    })
+       .then((response) => { console.log(response); }) 
+       .catch((error) => { console.error(error); });
   }
 </script>
 
@@ -46,22 +39,22 @@
        <div class="rounded-md shadow-sm">
          <div class="my-4">
                <label for="email-address" class="sr-only">Email address</label>
-               <input bind:value={username} id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full rounded-t-md border-0 py-1.5 my-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Email address">
+               <input bind:value={myusername} id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full rounded-t-md border-0 py-1.5 my-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Email address">
                <h2>email</h2>
-               <h2>{username}</h2>
+               <h2>{myusername}</h2>
         </div>
          <div class="my-4">
                <label for="password" class="sr-only">Password</label>
-               <input bind:value={password} id="password" name="password" type="password" autocomplete="current-password" required class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Password">
+               <input bind:value={mypassword} id="password" name="password" type="password" autocomplete="current-password" required class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Password">
                <h2>Password</h2>
-               <h2>{password}</h2>
+               <h2>{mypassword}</h2>
          </div>
          
        </div>
  
        <div class="flex items-center justify-between">
          <div class="flex items-center">
-           <input bind:value={password} id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+           <input bind:value={mypassword} id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
            <label for="remember-me" class="ml-2 block text-sm text-gray-900">Remember me</label>
          </div>
  
