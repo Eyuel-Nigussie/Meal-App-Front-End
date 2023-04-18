@@ -1,7 +1,6 @@
 <script>
-import { Link} from 'svelte-routing';
 
-
+let recipes = [] //store the recipes from db
 
 </script>	
   

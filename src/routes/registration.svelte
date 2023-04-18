@@ -3,6 +3,7 @@
    import {push} from 'svelte-spa-router'
 
    let name = '', email = '', password = '';
+   let has_error = false;
 
    $: submit = async () => {
     await axios.post('http://127.0.0.1:8000/users/',{
@@ -47,7 +48,9 @@
                 <h2>Password</h2>
                 <h2>{password}</h2>
           </div>
-          
+            {#if has_error}
+                <h1>Registration Failed</h1>
+            {/if}
         </div>
   
         <div class="flex items-center justify-between">
