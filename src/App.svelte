@@ -22,7 +22,7 @@
   import Router from 'svelte-spa-router' 
   
 let routes = {
-  "/": Home,
+  "/": Login,
   "/recipes": Recipes,
   "/addrecipe": AddRecipe,
   // "/recipe": Recipe,
