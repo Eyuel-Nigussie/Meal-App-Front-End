@@ -1,23 +1,43 @@
+<script>
+  import axios from 'axios';
+import {onMount} from 'svelte'
+let message = ''
+let profile = ''
+onMount(async (message) => {
+    const token = localStorage.getItem('access_token')
+    const response = await axios.get('http://127.0.0.1:8000/users/4', {
+        headers: {
+             Authorization: `Bearer ${token}`
+        },
+    });
+
+    // const content = await response.json();
+
+    profile = response.data;
+    console.log(profile);
+})
+</script>
+
 <div class="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg mx-auto">
-    <div class="px-4 py-5 sm:px-6">
+    <div class="px-profile4 py-5 sm:px-6">
         <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">User <span class="text-red-600 dark:text-blue-500">Info</span></h1>  
 
         <p class="mt-1 max-w-2xl text-sm text-gray-500">
             Details and informations about user.
         </p>
     </div>
-    <div class="flip-card">
+    <!-- <div class="flip-card">
         <div class="flip-card-inner">
           <div class="flip-card-front">
             <img src="https://static.vecteezy.com/system/resources/previews/019/896/012/large_2x/female-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png" alt="Avatar" style="width:300px;height:300px;">
-          </div>
+          </div>    
           <div class="flip-card-back">
-            <h1>John Doe</h1> 
+            <h1>{profile.name}</h1> 
             <p>Architect & Engineer</p> 
             <p>We love that guy</p>
           </div>
         </div>
-      </div>
+    </div> -->
     <div class="border-t border-gray-200">
         <dl>
             <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -25,7 +45,7 @@
                     Full name
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    Mickael Poulaz
+                   {profile.name}
                 </dd>
             </div>
             <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -41,7 +61,7 @@
                     Email address
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    m.poul@example.com
+                   {profile.email}
                 </dd>
             </div>
             <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
