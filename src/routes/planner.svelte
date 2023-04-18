@@ -1,6 +1,6 @@
 <script>
     import { onDestroy } from 'svelte'
-    import {scheduleStore} from "../schedule-store"
+    import { scheduleStore } from "../schedule-store"
     import Calendar from  './calendar.svelte'
     import Schedule from './scheduler.svelte'
     let schedule = {};

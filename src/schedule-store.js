@@ -19,4 +19,4 @@ const scheduleData ={
     ]
 }
 
-export const scheduleStore = storeInBrowser('mySchedule', scheduleData);)
+export const scheduleStore = storeInBrowser('mySchedule', scheduleData);
