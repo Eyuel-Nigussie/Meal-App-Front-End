@@ -6,8 +6,8 @@
   import TailwindCss from './TailwindCSS.svelte'
   import Home from './routes/home.svelte'
   import Recipes from './routes/recipes.svelte'
-  import Recipe from './routes/recipe.svelte'
-  import RecipeDetial from './routes/recipeDetail.svelte'
+  // import Recipe fromx` './routes/recipe.svelte'
+  import RecipeDetial from './routes/recipeDetailWrapper.svelte'
   import AddRecipe from './routes/addRecipe.svelte'
   import Login from './routes/login.svelte'
   import Dashboard from './routes/dashboard.svelte'
@@ -25,7 +25,8 @@ let routes = {
   "/": Home,
   "/recipes": Recipes,
   "/addrecipe": AddRecipe,
-  "/recipe/*": RecipeDetial,
+  // "/recipe": Recipe,
+  "/recipe/:id": RecipeDetial,
   "/login": Login,
   '/register': Register,
   "/dashboard": Dashboard,
