@@ -292,10 +292,11 @@ let recipes = [] //store the recipes from db
 		</div>
 
 <!-- ====== Cards Section Start -->
-<section class="bg-[#F3F4F6] pt-20 pb-10 mb-0 lg:pt-[120px] lg:pb-20">
+<section class="hidden md:block bg-[#F3F4F6] pt-20 pb-10 mb-0 lg:pt-[120px] lg:pb-20">
   <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">My <span class="text-red-600 dark:text-blue-500">Recipes</span></h1>  
   <div class="container mx-auto">
     <div class="flex flex-wrap">
+      
       <div class="w-full px-4 md:w-1/2 xl:w-1/3">
         <div class="mb-10 overflow-hidden rounded-lg bg-white">
           <img
@@ -364,10 +365,10 @@ let recipes = [] //store the recipes from db
           <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
             <h3>
               <a
-                href="javascript:void(0)"
+                href="/#/recipe/23"
                 class="text-dark hover:text-primary mb-4 block text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
               >
-                Creative Card Component designs graphic elements
+                Kurt sega
               </a>
             </h3>
             <p class="text-body-color mb-7 text-base leading-relaxed">
@@ -375,7 +376,7 @@ let recipes = [] //store the recipes from db
               Lorem consectetur adipiscing elit.
             </p>
             <a
-              href="javascript:void(0)"
+              href="/#/recipe/22"   
               class="text-body-color hover:border-primary hover:bg-slate-800 inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
             >
               View Details
@@ -404,7 +405,7 @@ let recipes = [] //store the recipes from db
               Lorem consectetur adipiscing elit.
             </p>
             <a
-              href="javascript:void(0)"
+              href="/#/recipe/25"
               class="text-body-color hover:border-primary hover:bg-red-500 inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
             >
               View Details
