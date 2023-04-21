@@ -4,6 +4,8 @@
 	  import MultiSelect from './MultiSelect.svelte';
     import Dropzone from "svelte-file-dropzone";
 
+    let name = '', description = '', cooking_time = '', collection = '', picture= ''
+
   let files = {
     accepted: [],
     rejected: []
@@ -61,11 +63,39 @@ let values=[{
 			values = values.slice(0, values.length-1)
 		};
 
+
+//------------------- saving the recipe first ---------------
+$: addRecipe = async () => {
+    const token = localStorage.getItem('access_token')
+    // await axios.post("http://127.0.0.1:8000/recipes", {
+    //   name,
+    //   description,
+    //   cooking_time,
+    //   collection,
+    //   picture
+    // })
+      // if successful redirect to login page
+      // await push("/login");
+    const res = await axios.post('http://127.0.0.1:8000/recipes', {
+        name,
+        description,
+        cooking_time,
+        collection,
+        picture
+      }, {
+        headers: {
+             Authorization: `Bearer ${token}`
+        },
+      });
+      // const token_is = res.data.headers['Content-Type']; // text/json
+      const recipe_is = res.data
+      console.log(recipe_is.id)
+};
 </script>
 
 
 <div class="mb-20">
-<form class="w-full mx-auto max-w-lg mb-10">
+<form class="w-full mx-auto max-w-lg mb-10" on:submit|preventDefault={addRecipe}>
     <div class="flex flex-wrap -mx-3 mb-6">
       <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Add <span class="text-red-600 dark:text-blue-500">Recipes</span></h1>  
     </div>
@@ -74,7 +104,7 @@ let values=[{
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
           Recipe Name
         </label>    
-        <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="dr. abiy ( ye emama fishka)">
+        <input bind:value={name} class="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="dr. abiy ( ye emama fishka)">
       </div>
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
@@ -82,7 +112,7 @@ let values=[{
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
           Description
         </label>
-        <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="dr. abiy ( ye emama fishka)">
+        <input bind:value={description} class="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="dr. abiy ( ye emama fishka)">
         <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
       </div>
     </div>
@@ -90,7 +120,7 @@ let values=[{
     <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full px-3">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-              Ingredients
+              Ingredients<br/>
             </label>    
             <MultiSelect id='lang' bind:value>
             {#each ing as ingredient, i}
@@ -133,7 +163,7 @@ let values=[{
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
           Cooking Time
         </label>
-        <input class="appearance-none block w-full  text-black border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="Albuquerque">
+        <input bind:value={cooking_time} class="appearance-none block w-full  text-black border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="Albuquerque">
       </div>
       <!-- <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
         <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-state">
@@ -154,7 +184,13 @@ let values=[{
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
           Collection
         </label>
-        <input class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="recipe collection catagory">
+        <input bind:value={collection} class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="recipe collection catagory">
+      </div>
+      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
+          Picture Link
+        </label>
+        <input bind:value={picture} class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="Picture Link">
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full px-3">
