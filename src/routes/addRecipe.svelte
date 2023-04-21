@@ -1,11 +1,70 @@
 <script>
-	import MultiSelect from './MultiSelect.svelte';
+     import axios from 'axios';
+    import { onMount } from 'svelte'; 
+	  import MultiSelect from './MultiSelect.svelte';
+    import Dropzone from "svelte-file-dropzone";
+
+  let files = {
+    accepted: [],
+    rejected: []
+  };
+
+  function handleFilesSelect(e) {
+    const { acceptedFiles, fileRejections } = e.detail;
+    files.accepted = [...files.accepted, ...acceptedFiles];
+    files.rejected = [...files.rejected, ...fileRejections];
+  }
+
 	let value;
-    let ingredients = ['egg', 'cabage', 'flour', 'butter', 'vanilla', 'royal', 'fanta', 'juice', 'melon', 'drink',]
+    let ing = [
+        {id: 1, name: 'flour'},
+        {id: 2, name: 'sugar'},
+        {id: 3, name: 'egg'},
+        {id: 4, name: 'oil'},
+        {id: 5, name: 'shiro'},
+        {id: 6, name: 'salad'},
+        {id: 7, name: 'fish'},
+        {id: 8, name: 'meser'},
+        {id: 9, name: 'shiro'},
+        {id: 10, name: 'ater'},
+        {id: 11, name: 'injera'},
+        {id: 12, name: 'brocolli'},
+        {id: 13, name: 'onion'},
+        {id: 14, name: 'venigar'},
+        {id: 15, name: 'milk'}
+    ]
+    let ingredients = []
+    
+//     onMount(async (message) => {
+//     const token = localStorage.getItem('access_token')
+//     const response = await axios.get('http://127.0.0.1:8000/ingredients', {
+//         headers: {
+//              Authorization: `Bearer ${token}`
+//         },
+//     });
+
+//     // const content = await response.json();
+
+//     ingredients = response.data
+//     alert(ingredients);
+// })
+
+let values=[{
+			"step": ""
+		}];
+
+		const addField = () => {
+			values = [...values, { step: ''}]
+		};
+
+		const removeField = () => {
+			values = values.slice(0, values.length-1)
+		};
+
 </script>
 
 
-
+<div class="mb-20">
 <form class="w-full mx-auto max-w-lg mb-10">
     <div class="flex flex-wrap -mx-3 mb-6">
       <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Add <span class="text-red-600 dark:text-blue-500">Recipes</span></h1>  
@@ -27,139 +86,48 @@
         <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
       </div>
     </div>
+    
     <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full px-3">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                Recipe Name
+              Ingredients
             </label>    
-        
             <MultiSelect id='lang' bind:value>
-            {#each ingredients as ingredient}
-            <option value="{ingredient}">{ingredient}</option>
+            {#each ing as ingredient, i}
+              <!-- {console.log(ingredient.id)} -->{i}
+              <option value={ingredient.id}>{ingredient.name}</option>
             {/each}
             </MultiSelect> 
         </div>
     </div>
-    
-
-
-     
-<!-- <div class="w-full md:w-1/2 flex flex-col items-center h-64 mx-auto">
-  <div class="w-full px-4">
-      <div class="flex flex-col items-center relative">
-          <div class="w-full  svelte-1l8159u">
-              <div class="my-2 p-1 flex border border-gray-200 bg-white rounded svelte-1l8159u">
-                  <div class="flex flex-auto flex-wrap">
-                      <div class="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-teal-700 bg-teal-100 border border-teal-300 ">
-                          <div class="text-xs font-normal leading-none max-w-full flex-initial">HTML</div>
-                          <div class="flex flex-auto flex-row-reverse">
-                              <div>
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x cursor-pointer hover:text-teal-400 rounded-full w-4 h-4 ml-2">
-                                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                                  </svg>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-teal-700 bg-teal-100 border border-teal-300 ">
-                          <div class="text-xs font-normal leading-none max-w-full flex-initial">Ruby</div>
-                          <div class="flex flex-auto flex-row-reverse">
-                              <div>
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x cursor-pointer hover:text-teal-400 rounded-full w-4 h-4 ml-2">
-                                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                                  </svg>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-teal-700 bg-teal-100 border border-teal-300 ">
-                          <div class="text-xs font-normal leading-none max-w-full flex-initial">Javascript</div>
-                          <div class="flex flex-auto flex-row-reverse">
-                              <div>
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x cursor-pointer hover:text-teal-400 rounded-full w-4 h-4 ml-2">
-                                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                                  </svg>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="flex-1">
-                          <input placeholder="" class="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-gray-800">
-                      </div>
-                  </div>
-                  <div class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 svelte-1l8159u">
-                      <button class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up w-4 h-4">
-                              <polyline points="18 15 12 9 6 15"></polyline>
-                          </svg>
-                      </button>
-                  </div>
-              </div>
-          </div>
-          <div class="absolute shadow top-100 bg-white z-40 w-full lef-0 rounded max-h-select overflow-y-auto svelte-5uyqqj">
-              <div class="flex flex-col w-full">
-                  <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100">
-                      <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
-                          <div class="w-full items-center flex">
-                              <div class="mx-2 leading-6  ">Python </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="cursor-pointer w-full border-gray-100 border-b hover:bg-teal-100">
-                      <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative border-teal-600">
-                          <div class="w-full items-center flex">
-                              <div class="mx-2 leading-6  ">Javascript </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="cursor-pointer w-full border-gray-100 border-b hover:bg-teal-100">
-                      <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative border-teal-600">
-                          <div class="w-full items-center flex">
-                              <div class="mx-2 leading-6  ">Ruby </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="cursor-pointer w-full border-gray-100 border-b hover:bg-teal-100">
-                      <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
-                          <div class="w-full items-center flex">
-                              <div class="mx-2 leading-6  ">JAVA </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="cursor-pointer w-full border-gray-100 border-b hover:bg-teal-100">
-                      <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
-                          <div class="w-full items-center flex">
-                              <div class="mx-2 leading-6  ">ASP.Net </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="cursor-pointer w-full border-gray-100 border-b hover:bg-teal-100">
-                      <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
-                          <div class="w-full items-center flex">
-                              <div class="mx-2 leading-6  ">C++ </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="cursor-pointer w-full border-gray-100 border-b hover:bg-teal-100">
-                      <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
-                          <div class="w-full items-center flex">
-                              <div class="mx-2 leading-6  ">SQL </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="cursor-pointer w-full border-gray-100 rounded-b hover:bg-teal-100">
-                      <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative border-teal-600">
-                          <div class="w-full items-center flex">
-                              <div class="mx-2 leading-6  ">HTML </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
+    <div class="flex flex-wrap -mx-3 ">
+      {#each values as v, i}
+      <div class="w-full px-3">
+        <p class="text-gray-600 text-xs italic">Step {i+1}</p>       
+        <input  bind:value={values[i].url} placeholder="write your step to cook your meal" class="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="large_size" type="text"> 
       </div>
-  </div>
-</div> -->
-
+      {/each}
+    </div>
+    <!--{#if values.length >= 6}
+      <input type="button" value="Remove" on:click={removeField}>
+      {/if}-->
+      <div class="mb-6">
+        <button
+         on:click|preventDefault={addField}
+         type="button"
+         class="inline-block rounded-full border-2 border-success px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-success transition duration-150 ease-in-out hover:border-success-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-success-600 focus:border-success-600 focus:text-success-600 focus:outline-none focus:ring-0 active:border-success-700 active:text-success-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+        data-te-ripple-init>
+          Add
+      </button> 
+      <button
+        on:click|preventDefault={removeField}
+        type="button"
+        class="inline-block rounded-full border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+        data-te-ripple-init>
+          Remove  
+      </button>
+   </div>
+   
     <div class="flex flex-wrap -mx-3 mb-2">
       <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
@@ -184,15 +152,23 @@
       </div> -->
       <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
-          Zip
+          Collection
         </label>
-        <input class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="90210">
-      </div>        
-      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Upload multiple files</label>
-     <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple>
+        <input class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="recipe collection catagory">
+      </div>
+      <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full px-3">
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="large_size">Large file input</label>
+          <input class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="large_size" type="file">        
+          </div>
+      </div>
     </div>
+   
+    <button class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
+      save
+    </button>
   </form>
-  <p>
+  <!-- <p>
 	Let's read the <code>value</code> of the MultiSelect:
 </p>
 {#if value && value.length}
@@ -207,7 +183,7 @@
 	<div>
 		Nothing selected
 	</div>
-{/if}
+{/if} -->
     <!-- //   <label for="underline_select" class="sr-only">Underline select</label>
     //     <select id="underline_select" class="block py-2.5 px-0 mb-6 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
     //       <option selected>Choose a Collection</option>
@@ -237,6 +213,7 @@
 
 
   <!-- component -->
+</div>
 <style>
   .top-100 {top: 100%}
   .bottom-100 {bottom: 100%}

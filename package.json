@@ -24,6 +24,7 @@
     "flowbite": "^1.6.5",
     "flowbite-svelte": "^0.34.9",
     "js-cookie": "^3.0.1",
+    "svelte-file-dropzone": "^0.0.15-dev.0",
     "svelte-materialify": "^0.3.11",
     "svelte-multiselect": "^8.6.0",
     "svelte-routing": "^1.6.0",

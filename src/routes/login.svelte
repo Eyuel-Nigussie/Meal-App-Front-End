@@ -28,15 +28,15 @@
 </script>
 
 
-<div class="flex min-h-full items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
+<div class="flex min-h-full items-center justify-center px-4 py-6 sm:px-6 lg:px-8 mb-20 -mt-20">
    <div class="w-full max-w-md">
      <div>
-       <img class="mx-auto h-22 w-auto" src="https://www.linkpicture.com/q/Meal_Planner-removebg-preview_1.png" alt="Your Company">
+       <img class="-mt-10 mx-auto h-18 w-auto" src="https://www.linkpicture.com/q/Meal_Planner-removebg-preview_1.png" alt="Your Company">
        <h2 class="text-center text-3xl font-bold tracking-tight text-gray-900">Sign In to your account</h2>
        <p class="mt-2 text-center text-sm text-gray-600">
          Or
               <!-- svelte-ignore a11y-invalid-attribute -->
-         <a href="/#/register" class="font-medium text-indigo-600 hover:text-indigo-500">Click here to Sign UP</a>
+         <a href="/#/register" class="font-medium text-red-600 hover:text-red-500">Click here to Sign UP</a>
        </p>
      </div>
      <form class="space-y-6" on:submit|preventDefault={submit}>
@@ -65,14 +65,14 @@
  
          <div class="text-sm">
            <!-- svelte-ignore a11y-invalid-attribute -->
-           <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Forgot your password?</a>
+           <a href="#" class="font-medium text-red-600 hover:text-red-500">Forgot your password?</a>
          </div>
        </div>
  
-       <div>
-         <button type="submit" class="group relative flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 bg-red-600">
+       <div class="bg-red-500">
+         <button type="submit" class="group-* relative flex w-full justify-center rounded-md  px-3 py-2  font-semibold text-white bg-red-500 hover:bg-red-300">
            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-             <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+             <svg class="h-5 w-5 text-red-500 group-hover:text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
              </svg>
            </span>
