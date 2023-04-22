@@ -1,5 +1,5 @@
 <script>
-  import axios from 'axios';
+import axios from 'axios';
 import {onMount} from 'svelte'
 let message = ''
 let profile = ''

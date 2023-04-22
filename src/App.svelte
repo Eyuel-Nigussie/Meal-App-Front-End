@@ -26,7 +26,7 @@ let routes = {
   "/recipes": Recipes,
   "/addrecipe": AddRecipe,
   // "/recipe": Recipe,
-  "/recipe/:id": RecipeDetial,
+  "/recipe/:recipe": RecipeDetial,
   "/login": Login,
   '/register': Register,
   "/dashboard": Dashboard,

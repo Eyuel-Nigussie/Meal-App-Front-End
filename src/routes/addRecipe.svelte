@@ -37,19 +37,19 @@
     ]
     let ingredients = []
     
-//     onMount(async (message) => {
-//     const token = localStorage.getItem('access_token')
-//     const response = await axios.get('http://127.0.0.1:8000/ingredients', {
-//         headers: {
-//              Authorization: `Bearer ${token}`
-//         },
-//     });
+    onMount(async (message) => {
+    const token = localStorage.getItem('access_token')
+    const response = await axios.get('http://127.0.0.1:8000/ingredients', {
+        headers: {
+             Authorization: `Bearer ${token}`
+        },
+    });
 
-//     // const content = await response.json();
+    // const content = await response.json();
 
-//     ingredients = response.data
-//     alert(ingredients);
-// })
+    ingredients = response.data
+    alert(ingredients);
+})
 
 let values=[{
 			"step": ""
