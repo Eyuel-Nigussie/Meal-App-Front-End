@@ -5,7 +5,9 @@ let message = ''
 let profile = ''
 onMount(async (message) => {
     const token = localStorage.getItem('access_token')
-    const response = await axios.get('http://127.0.0.1:8000/users/4', {
+    const user = localStorage.getItem('user_id')
+    console.log(user)
+    const response = await axios.get(`http://127.0.0.1:8000/users/${user}`, {
         headers: {
              Authorization: `Bearer ${token}`
         },
