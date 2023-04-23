@@ -25,7 +25,7 @@ onMount(async (message) => {
         <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">User <span class="text-red-600 dark:text-blue-500">Info</span></h1>  
 
         <p class="mt-1 max-w-2xl text-sm text-gray-500">
-            Details and informations about user.
+            Details and informations about you
         </p>
     </div>
     <!-- <div class="flip-card">
