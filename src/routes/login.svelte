@@ -19,6 +19,7 @@
        .then(
         (response) => { 
                         localStorage.setItem('access_token', response.data.access_token);
+                        localStorage.setItem('user_id', response.data.user.id);
                         push('/profile');
                       }
         
