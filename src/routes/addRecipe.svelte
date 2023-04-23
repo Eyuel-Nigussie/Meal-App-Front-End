@@ -1,11 +1,12 @@
 <script>
-     import axios from 'axios';
+    import axios from 'axios';
     import { onMount } from 'svelte'; 
 	  import MultiSelect from './MultiSelect.svelte';
-    import Dropzone from "svelte-file-dropzone";
+  
 
-    let name = '', description = '', cooking_time = '', collection = '', picture= ''
-
+  let name = '', description = '', cooking_time = '', collection = '', picture= ''
+  let keys
+  let loading = true
   let files = {
     accepted: [],
     rejected: []
@@ -18,38 +19,26 @@
   }
 
 	let value;
-    let ing = [
-        {id: 1, name: 'flour'},
-        {id: 2, name: 'sugar'},
-        {id: 3, name: 'egg'},
-        {id: 4, name: 'oil'},
-        {id: 5, name: 'shiro'},
-        {id: 6, name: 'salad'},
-        {id: 7, name: 'fish'},
-        {id: 8, name: 'meser'},
-        {id: 9, name: 'shiro'},
-        {id: 10, name: 'ater'},
-        {id: 11, name: 'injera'},
-        {id: 12, name: 'brocolli'},
-        {id: 13, name: 'onion'},
-        {id: 14, name: 'venigar'},
-        {id: 15, name: 'milk'}
-    ]
-    let ingredients = []
+  
+let ingredients = []
     
-    onMount(async (message) => {
-    const token = localStorage.getItem('access_token')
-    const response = await axios.get('http://127.0.0.1:8000/ingredients', {
-        headers: {
-             Authorization: `Bearer ${token}`
-        },
-    });
-
-    // const content = await response.json();
-
-    ingredients = response.data
-    alert(ingredients);
+const token = localStorage.getItem('access_token')
+onMount( async () => {
+  try{
+    ingredients = await fetch('http://127.0.0.1:8000/ingredients',{
+    method:  'GET',
+    headers: {
+     Authorization: `Bearer ${token}`
+    },
+    }).then((response) => { return response.json()})
+         keys  =  Object.keys(ingredients);
+         console.log(ingredients)
+         loading = false;
+    }catch(e){
+      console.log('error')
+    }
 })
+
 
 let values=[{
 			"step": ""
@@ -67,15 +56,6 @@ let values=[{
 //------------------- saving the recipe first ---------------
 $: addRecipe = async () => {
     const token = localStorage.getItem('access_token')
-    // await axios.post("http://127.0.0.1:8000/recipes", {
-    //   name,
-    //   description,
-    //   cooking_time,
-    //   collection,
-    //   picture
-    // })
-      // if successful redirect to login page
-      // await push("/login");
     const res = await axios.post('http://127.0.0.1:8000/recipes', {
         name,
         description,
@@ -122,12 +102,16 @@ $: addRecipe = async () => {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
               Ingredients<br/>
             </label>    
+            
+            {#if loading}
+              <h1>Loading</h1>
+            {:else}
             <MultiSelect id='lang' bind:value>
-            {#each ing as ingredient, i}
-              <!-- {console.log(ingredient.id)} -->{i}
-              <option value={ingredient.id}>{ingredient.name}</option>
-            {/each}
-            </MultiSelect> 
+              {#each ingredients as ingredient, i}
+                <option value={ingredient.id}>{ingredient.name}</option>
+              {/each}
+           </MultiSelect> 
+            {/if}
         </div>
     </div>
     <div class="flex flex-wrap -mx-3 ">
