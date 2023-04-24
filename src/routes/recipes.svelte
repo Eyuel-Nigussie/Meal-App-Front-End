@@ -1,7 +1,5 @@
 <script>
 // @ts-nocheck
-
-import axios from 'axios';
 import {onMount} from 'svelte'
 let recipes   //store the recipes from db
 let keys
@@ -105,7 +103,7 @@ onMount( async () => {
       
 {#each keys as recipe}
 <!-- ====== Cards Section Start -->
-
+      
       <div class="w-full px-4 md:w-1/2 xl:w-1/3">
         <div class="mb-10 overflow-hidden rounded-lg bg-white">
           <!-- svelte-ignore a11y-img-redundant-alt -->
