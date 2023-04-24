@@ -4,7 +4,7 @@
 	  import MultiSelect from './MultiSelect.svelte';
   
 
-  let name = '', description = '', cooking_time = '', collection = '', picture= ''
+  let name = '', description = '', cooking_time = '', collection = '', picture= '', ingredient_ids = [], steps= ''
   let keys
   let loading = true
   let files = {
@@ -54,14 +54,17 @@ let values=[{
 
 
 //------------------- saving the recipe first ---------------
+$:  ingredient_ids =value
+
 $: addRecipe = async () => {
     const token = localStorage.getItem('access_token')
-    const res = await axios.post('http://127.0.0.1:8000/recipes', {
+    const res = await axios.post('127.0.0.1:8000/recipes/recipes/', {
         name,
         description,
         cooking_time,
         collection,
-        picture
+        picture,
+        // ingredient_ids
       }, {
         headers: {
              Authorization: `Bearer ${token}`
@@ -69,8 +72,9 @@ $: addRecipe = async () => {
       });
       // const token_is = res.data.headers['Content-Type']; // text/json
       const recipe_is = res.data
-      console.log(recipe_is.id)
 };
+
+$:  console.log(ingredient_ids)
 </script>
 
 
@@ -106,12 +110,14 @@ $: addRecipe = async () => {
             {#if loading}
               <h1>Loading</h1>
             {:else}
+            {value}
             <MultiSelect id='lang' bind:value>
               {#each ingredients as ingredient, i}
                 <option value={ingredient.id}>{ingredient.name}</option>
               {/each}
            </MultiSelect> 
             {/if}
+            
         </div>
     </div>
     <div class="flex flex-wrap -mx-3 ">
