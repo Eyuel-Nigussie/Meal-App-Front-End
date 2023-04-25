@@ -91,7 +91,7 @@
   .month {
     padding: 70px 25px;
     width: 100%;
-    background: #8b000076;
+    background: #f5dadafd;
     text-align: center;
   }
   
@@ -101,11 +101,12 @@
   }
   
   .month ul li {
-    color: rgb(8, 8, 8);
+    color: rgb(255, 255, 255);
     font-size: 25px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 3px;
+    border: 1px solid rgba(255, 149, 149, 0.166);
   }
   
   .month .prev {
@@ -123,7 +124,7 @@
   .weekdays {
     margin: 0;
     padding: 10px 0;
-    background-color: #5b00003c;
+    background-color: #ff5353a2;
  
   }
   
@@ -136,7 +137,7 @@
   
   .days {
     padding: 20px 0;
-    background: #eee;
+    background: rgba(255, 255, 255, 0.257);
     margin: 0;
   }
   
@@ -158,13 +159,14 @@
     text-align: center;
     margin-bottom: 1px;
     font-size: 1.2rem;
-    color: #777;
+    color: #000000;
     cursor: pointer;
   }
   
   .active {
     padding: 5px;
     background: #4400005c;
+    border: 1px solid red;
     color: white 
   }
 
