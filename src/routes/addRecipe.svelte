@@ -7,21 +7,12 @@
   let name = '', description = '', cooking_time = '', collection = '', picture= '', ingredient_ids = [], steps= ''
   let keys
   let loading = true
-  let files = {
-    accepted: [],
-    rejected: []
-  };
 
-  function handleFilesSelect(e) {
-    const { acceptedFiles, fileRejections } = e.detail;
-    files.accepted = [...files.accepted, ...acceptedFiles];
-    files.rejected = [...files.rejected, ...fileRejections];
-  }
-
-	let value;
+	let value = [];
   
-let ingredients = []
-    
+let ingredients = [] 
+let stepz = []
+
 const token = localStorage.getItem('access_token')
 onMount( async () => {
   try{
@@ -32,49 +23,57 @@ onMount( async () => {
     },
     }).then((response) => { return response.json()})
          keys  =  Object.keys(ingredients);
-         console.log(ingredients)
          loading = false;
     }catch(e){
-      console.log('error')
+      console.log('getting ingredients error: ' + e.message)
     }
 })
 
-
+// ============ steps of recipe ========================
+let num
 let values=[{
-			"step": ""
+      "step_number": 0,
+			"description": ""
 		}];
 
 		const addField = () => {
-			values = [...values, { step: ''}]
+      const newStepNumber = values.length > 0 ? values[values.length - 1].step_number + 1 : 0;
+			values = [...values, { step_number: newStepNumber , description: ''}]
 		};
-
 		const removeField = () => {
 			values = values.slice(0, values.length-1)
 		};
 
 
 //------------------- saving the recipe first ---------------
+$:  stepz = values
+$: console.log(stepz)
 $:  ingredient_ids =value
-
 $: addRecipe = async () => {
     const token = localStorage.getItem('access_token')
-    const res = await axios.post('127.0.0.1:8000/recipes/recipes/', {
-        name,
-        description,
-        cooking_time,
-        collection,
-        picture,
-        // ingredient_ids
+    const user_id = localStorage.getItem('user_id');
+    const res = await axios.post('http://127.0.0.1:8000/recipes/recipes', {
+        // 
+        // // ingredient_ids
+           name,
+           description,
+           cooking_time,
+           collection,
+           picture,
+          "user_id": user_id,
+          "ingredient_ids": ingredient_ids,
+          "quantities": [500, 200, 1],
+          "units": ["g", "g", "can"],
+          "steps": stepz
       }, {
         headers: {
              Authorization: `Bearer ${token}`
         },
       });
-      // const token_is = res.data.headers['Content-Type']; // text/json
-      const recipe_is = res.data
-};
+      // console.log(res)
+  };
 
-$:  console.log(ingredient_ids)
+ // const token_is = res.data.headers['Content-Type']; // text/json
 </script>
 
 
@@ -112,6 +111,7 @@ $:  console.log(ingredient_ids)
             {:else}
             {value}
             <MultiSelect id='lang' bind:value>
+                <option value=''></option>
               {#each ingredients as ingredient, i}
                 <option value={ingredient.id}>{ingredient.name}</option>
               {/each}
@@ -123,9 +123,10 @@ $:  console.log(ingredient_ids)
     <div class="flex flex-wrap -mx-3 ">
       {#each values as v, i}
       <div class="w-full px-3">
-        <p class="text-gray-600 text-xs italic">Step {i+1}</p>       
-        <input  bind:value={values[i].url} placeholder="write your step to cook your meal" class="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="large_size" type="text"> 
-      </div>
+        <p class="text-gray-600 text-xs italic">Step {i+1}</p> 
+        <input bind:value={values[i].step_number } type="hidden" name="" id="">
+        <input bind:value={values[i].description} placeholder="write your step to cook your meal" class="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="large_size" type="text"> 
+     </div>
       {/each}
     </div>
     <!--{#if values.length >= 6}
