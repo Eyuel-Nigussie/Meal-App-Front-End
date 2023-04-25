@@ -22,9 +22,11 @@ export let params;
 let recipe_row = params.recipe
 let recipe = decodeURIComponent(recipe_row)
 recipe = JSON.parse(recipe)
+console.log('recipe ingredient is below')
+console.log(recipe.ingredients[1].name)
 </script>
 
-<div class="p-4">
+<div class="pl-8 p-4 mx-auto">
 
   <div class="px-4 sm:px-0">
     <h3 class="text-base font-semibold leading-7 text-gray-900">Recipe Information</h3>
@@ -54,11 +56,30 @@ recipe = JSON.parse(recipe)
           <dt class="text-sm font-medium leading-6 text-gray-900">Collection</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{recipe.collection}</dd>
         </div>
-        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900">Picture</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{recipe.picture}</dd>
-        </div>
-      
+        
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">ingredients</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+              {#each recipe.ingredients as ingredient}
+                <li class="py-2">
+                    {ingredient.name}
+                </li>
+              {/each}  
+            </ul>  
+          </dd>
+       </div>
+       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm font-medium leading-6 text-gray-900">Cooking Steps</dt>
+        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <ol class="max-w-md space-y-1 text-gray-500 list-decimal list-inside dark:text-gray-400">            {#each recipe.steps as step}
+              <li class="py-2">
+                  {step.description}
+              </li>
+            {/each}  
+          </ol>  
+        </dd>
+     </div>
 
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"> 
             <SvelteFC {...chartConfig} />
