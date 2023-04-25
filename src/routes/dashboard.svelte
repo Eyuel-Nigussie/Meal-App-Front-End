@@ -42,7 +42,7 @@ let chartConfig = {
 const todos = createTodos(initialTodos)
 
 
-//*********** recipes preferences***********/**
+//*********** recipes preferences ***********/**
 
 let recipes   //store the recipes from db
 let keys
@@ -73,7 +73,7 @@ onMount( async () => {
     <SvelteFC {...chartConfig} />
   </div>
   <!-- ================================================== -->
-  <div class='grid grid-cols-2 gap-2 md:gap-5 max-w-[44em] mx-auto p-5 bg-red-100'>
+  <div class='grid grid-cols-2 gap-2 md:gap-5 max-w-[44em] mx-auto p-5 bg-red-50'>
     <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900  dark:text-white">Shopping <span class="text-red-600 dark:text-blue-500">List</span></h1>  
     <input
        class="text-lg col-span-2 py-4"
@@ -121,10 +121,10 @@ onMount( async () => {
 </div>
 
   <!-- ================ recipes preference =============== -->
-  <div class="md:hidden flex items-center justify-between px-2  font-large text-black">
-    <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">My <span class="text-red-600 dark:text-blue-500">Recipes</span></h1>  
+  <div class="md:hidden flex items-center justify-between p-4 font-large text-black">
+    <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">suggested <span class="text-red-600 dark:text-blue-500">Recipes</span></h1>  
   </div>
-  <h1 class="hidden md:block mb-4 pl-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">My <span class="text-red-600 dark:text-blue-500">Recipes</span></h1>  
+  <h1 class="hidden md:block mb-4 pl-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">suggested <span class="text-red-600 dark:text-blue-500">Recipes</span></h1>  
   
         {#if loading}
           <h1>Loading</h1>
