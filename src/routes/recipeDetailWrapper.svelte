@@ -23,7 +23,6 @@ let recipe_row = params.recipe
 let recipe = decodeURIComponent(recipe_row)
 recipe = JSON.parse(recipe)
 console.log('recipe ingredient is below')
-console.log(recipe.ingredients[1].name)
 </script>
 
 <div class="pl-8 p-4 mx-auto">
