@@ -1,4 +1,7 @@
 <script>
+  import axios from 'axios';
+
+
   import FusionCharts from 'fusioncharts';
   import Charts from 'fusioncharts/fusioncharts.charts';
   import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
@@ -23,6 +26,28 @@ let recipe_row = params.recipe
 let recipe = decodeURIComponent(recipe_row)
 recipe = JSON.parse(recipe)
 console.log('recipe ingredient is below')
+
+$: addShopping = async (id) => {
+    const token = localStorage.getItem('access_token')
+    const user_id = localStorage.getItem('user_id');
+    const res = await axios.post(`http://127.0.0.1:8000/recipes/shopping/${id}`, {
+       
+      }, {
+        headers: {
+             Authorization: `Bearer ${token}`
+        },
+      })
+      .then((response) => {
+          console.log(response.data);
+          // Perform any additional actions with the response data here
+      })
+      .catch((error) => {
+          console.log(error);
+          // Handle any errors that occur during the request
+      });
+};
+
+
 </script>
 
 <div class="pl-8 p-4 mx-auto">
@@ -61,8 +86,13 @@ console.log('recipe ingredient is below')
           <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
             <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
               {#each recipe.ingredients as ingredient}
-                <li class="py-2">
+                <li class="container py-2 flex justify-between">
                     {ingredient.name}
+                    <div on:click|preventDefault={addShopping(ingredient.id)}>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                    </svg>
+                    </div>
                 </li>
               {/each}  
             </ul>  
