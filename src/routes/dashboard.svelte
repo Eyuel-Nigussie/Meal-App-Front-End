@@ -1,4 +1,5 @@
 <script>
+<<<<<<< HEAD
 // @ts-nocheck
   import {onMount} from 'svelte'
 	import {createTodos} from '../store'
@@ -37,6 +38,16 @@ let chartObj,
       dataSource 
     };
 
+=======
+  import {createTodos} from '../store'
+  import { onMount } from 'svelte';
+
+  let recipes;
+  let recipesLoading = true;
+  let recipeKeys;
+  let ingredients;
+  let ingredientsLoading = true;
+>>>>>>> cdef76d (fetch shopping)
 
 	let uid = 1;
 
@@ -48,10 +59,74 @@ let chartObj,
 		{ id: uid++, done: false, description: 'feed the turtle' },
 		{ id: uid++, done: false, description: 'fix some bugs' },
 	];
+
+
+onMount(async () => {
+  const token = localStorage.getItem('access_token');
+
+  // Fetch ingredients
+
+  try {
+    ingredients = await fetch('http://127.0.0.1:8000/recipes/shopping', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    }).then((response) => response.json());
+      const updatedTodos = initialTodos.map(todo => {
+      const matchingIngredient = ingredients.find(ingredient => ingredient.name.toLowerCase() === todo.description.toLowerCase());
+      if (matchingIngredient) {
+        return { ...todo, description: matchingIngredient.name };
+      }
+      return todo;
+      ingredientsLoading = false;  });
+    } catch (error) {
+    console.log('Error fetching ingredients:', error);
+    }
+
+  // Fetch recipes
+
+  try {
+    recipes = await fetch('http://127.0.0.1:8000/recipes', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    }).then((response) => response.json());
+      recipeKeys = Object.keys(recipes);
+      // console.log(recipes);
+      recipesLoading = false;
+  } catch (error) {
+    console.log('Error fetching recipes:', error);
+  }
+});
+
+
+  // onMount( async () => {
+  //   let ingridients
+  //   const token = localStorage.getItem('access_token') 
+  //   let loading = true
+  // try{
+  //   ingridients = await fetch('http://127.0.0.1:8000/recipes/shopping',{
+  //   method:  'GET',
+  //   headers: {
+  //    Authorization: `Bearer ${token}`
+  //   },
+  //   }).then((response) => { return response.json()})
+  //       //  keys  =  Object.keys(recipes);
+  //        console.log(ingridients)
+  //        loading = false;
+  //   }catch(e){
+  //     console.log('error')
+  //   }
+  // })
+
+
 	
 const todos = createTodos(initialTodos)
 
 
+<<<<<<< HEAD
 //*********** recipes preferences ***********/**
 
 let recipes   //store the recipes from db
@@ -74,6 +149,29 @@ onMount( async () => {
       console.log('error')
     }
 })
+=======
+//*********** recipes preferences
+// import {onMount} from 'svelte'
+// onMount( async () => {
+//   const token = localStorage.getItem('access_token') 
+//   let recipes   //store the recipes from db
+// let keys
+// let loading = true
+//   try{
+//     recipes = await fetch('http://127.0.0.1:8000/recipes',{
+//     method:  'GET',
+//     headers: {
+//      Authorization: `Bearer ${token}`
+//     },
+//     }).then((response) => { return response.json()})
+//          keys  =  Object.keys(recipes);
+//          console.log(recipes)
+//          loading = false;
+//     }catch(e){
+//       console.log('error')
+//     }
+// })
+>>>>>>> cdef76d (fetch shopping)
 
 </script>
 
@@ -134,6 +232,7 @@ onMount( async () => {
   </div>
 </div>
 
+<<<<<<< HEAD
   <!-- ================ recipes preference =============== -->
   <div class="md:hidden flex items-center justify-between p-4 font-large text-black">
     <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">suggested <span class="text-red-600 dark:text-blue-500">Recipes</span></h1>  
@@ -156,6 +255,37 @@ onMount( async () => {
                         <div class="flex  overflow-hidden items-center justify-start" style="cursor: auto;">
                                                     
                                 <div class="relative w-32 h-32 flex-shrink-0">
+=======
+
+<!-- ================ recipes preference =============== -->
+<div class=" p-5">
+      <div class="md:hidden flex items-center justify-between px-2  font-large text-black">
+        <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">My <span class="text-red-600 dark:text-blue-500">Recipes</span></h1>  
+      </div>
+      <h1 class="hidden md:block mb-4 pl-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">My <span class="text-red-600 dark:text-blue-500">Recipes</span></h1>  
+
+            {#if recipesLoading}
+              <h1>Loading</h1>
+            {:else}
+              {#await recipes} 
+                <h1>waiting...</h1>
+              {:then recipes}
+                {#each recipeKeys as recipe}
+                <div class="md:hidden w-full hidden:lg rounded-xl border border-gray-200 bg-white py-4 px-2 shadow-md shadow-gray-100">
+                    <a href="/#/recipe/{encodeURIComponent(JSON.stringify(recipes[recipe]))}">       
+                      <div class="flex max-h-[100vh] w-full flex-col overflow-y-scroll">
+                        <button class="group flex items-center gap-x-5 rounded-md px-2.5 py-2 transition-all duration-75 hover:bg-red-100">
+                          <div class="container bg-white flex row border border-gray-300 rounded-xl justify-between">
+                            <div class="flex  overflow-hidden items-center justify-start" style="cursor: auto;">
+                                                        
+                                    <div class="relative w-32 h-32 flex-shrink-0">
+                                                                  
+                                      <div class="absolute left-0 top-0 w-full h-full flex items-center justify-center">
+                                                                      
+                                        <img alt="Placeholder Photo" class="absolute left-0 top-0 w-full h-full object-cover object-center transition duration-50" loading="lazy" src={recipes[recipe].picture}>
+                                                                  
+                                      </div>
+>>>>>>> cdef76d (fetch shopping)
                                                               
                                   <div class="absolute left-0 top-0 w-full h-full flex items-center justify-center">
                                     
@@ -178,6 +308,7 @@ onMount( async () => {
                                     </span>                  
                               </div>
                         </div>
+<<<<<<< HEAD
                         <div class="justify-self-end flex row pt-16">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -212,6 +343,45 @@ onMount( async () => {
                   class="text-dark hover:text-primary mb-4 text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
                 >
                   {recipes[recipe].name}
+=======
+                      </button>
+                    </div>
+                    </a>
+                
+      </div>
+      {/each}
+      <section class="hidden md:block bg-[#F3F4F6] pt-20 pb-10 mb-0 lg:pt-[120px] lg:pb-20">
+        <div class="container mx-auto">
+          <div class="flex flex-wrap">
+            
+      {#each recipeKeys as recipe}
+      <!-- ====== Cards Section Start -->
+            <div class="w-full px-4 md:w-1/2 xl:w-1/3">
+              <div class="mb-10 overflow-hidden rounded-lg bg-white">
+                <!-- svelte-ignore a11y-img-redundant-alt -->
+                <img
+                  src={recipes[recipe].picture}
+                  alt="image"
+                  class="w-full"
+                />
+                <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
+                  <h3>
+                    <div
+                      class="text-dark hover:text-primary mb-4 text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
+                    >
+                      {recipes[recipe].name}
+                    </div>
+                  </h3>
+                  <p class="text-body-color mb-7 text-base leading-relaxed">
+                    {recipes[recipe].description}
+                  </p>
+                  <a
+                    href="/#/recipe/{recipes[recipe].id}"
+                    class="text-body-color hover:border-primary hover:bg-red-600 inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
+                  >
+                    View Details
+                  </a>
+>>>>>>> cdef76d (fetch shopping)
                 </div>
               </h3>
               <p class="text-body-color mb-7 text-base leading-relaxed">
