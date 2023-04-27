@@ -1,8 +1,30 @@
 <script>
 import axios from 'axios';
 import {onMount} from 'svelte'
+
+import FusionCharts from 'fusioncharts';
+import Widgets from 'fusioncharts/fusioncharts.widgets';
+import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+import SvelteFC, { fcRoot } from 'svelte-fusioncharts';
+import dataSource from '../gauge'
 let message = ''
 let profile = ''
+
+
+fcRoot(FusionCharts, Widgets, FusionTheme);
+
+
+let     
+  chartConfig = {
+    type: 'angulargauge',
+    width: '600',
+    height: '400',
+    renderAt: 'chart-container',
+    dataSource
+  };
+
+
+
 onMount(async (message) => {
     const token = localStorage.getItem('access_token')
     const user = localStorage.getItem('user_id')
@@ -83,6 +105,9 @@ onMount(async (message) => {
                 </dd>
             </div>
         </dl>
+    </div>
+    <div id="chart-container" class="mb-8">
+        <SvelteFC {...chartConfig} />
     </div>
 </div>
 
