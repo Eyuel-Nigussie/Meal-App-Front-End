@@ -15,7 +15,7 @@
 
     const updateAppt = (e, key) => {
         let newValue;
-        console.log(e.target.nodeName)
+        // console.log(e.target.nodeName)
         e.target.nodeName === "P" ? newValue = e.target.textContent : newValue = e.target.checked
         scheduleStore.update(currDataState => {
             let i = currDataState[dateID].findIndex(appt => appt.id == apptID)

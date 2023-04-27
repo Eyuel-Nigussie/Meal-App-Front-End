@@ -2,6 +2,8 @@ import {writable} from 'svelte/store'
 
 const storeInBrowser = (key, data) => {
    const dataAsString = localStorage.getItem(key)
+   console.log('this are storage from local storage')
+   console.log(dataAsString)
    const dataAsObj = dataAsString ? JSON.parse(dataAsString) : data;
 
    const svelteStore = writable(dataAsObj, () =>{

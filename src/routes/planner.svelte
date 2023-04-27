@@ -56,7 +56,7 @@
         }
 
     }
-$: console.log(schedule)
+// $: console.log(schedule)
 </script>
 
 <section>
