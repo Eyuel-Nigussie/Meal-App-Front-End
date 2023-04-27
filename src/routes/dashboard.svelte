@@ -2,6 +2,33 @@
   import {createTodos} from '../store'
   import { onMount } from 'svelte';
 
+  import FusionCharts from 'fusioncharts';
+  import Charts from 'fusioncharts/fusioncharts.charts';
+  import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+  import SvelteFC, {fcRoot} from 'svelte-fusioncharts';
+  import dataSource from '../chart_data.js';
+
+
+  //============ chart ==================
+  fcRoot(FusionCharts, Charts, FusionTheme);
+
+const chartConfigs = {
+  type: 'column2d',
+  width: '600',
+  height: '400',
+  dataFormat: 'json',
+  dataSource
+};
+
+let chartConfig = {
+    type: 'pie3d',
+    width: '600',
+    height: '400',
+    renderAt: 'chart-container',
+    dataSource
+  };
+  //========= end chart ===================
+
   let recipes;
   let recipesLoading = true;
   let recipeKeys;
@@ -111,7 +138,10 @@ const todos = createTodos(initialTodos)
 
 </script>
 <!-- ================================================== -->
-
+<div id="container" class="md:ml-48 lg:ml-[420PX] pb-12">
+  <SvelteFC {...chartConfigs} class="mx-auto"/>  
+  <SvelteFC {...chartConfig} />
+</div>
 <div class='board p-5 bg-red-100'>
   <h2>Shopping List</h2>
 	<input
