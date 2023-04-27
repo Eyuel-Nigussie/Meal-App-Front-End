@@ -1,4 +1,5 @@
-<script >
+<script>
+    import {onMount} from 'svelte'
     import { createEventDispatcher} from 'svelte'
     import Appointment from './Appointment.svelte'
     export let dateID;
@@ -27,7 +28,27 @@
         }
     }
 
-    
+let recipes
+let keys
+let loading = true
+const token = localStorage.getItem('access_token') 
+
+onMount( async () => {
+  try{
+    recipes = await fetch('http://127.0.0.1:8000/recipes',{
+    method:  'GET',
+    headers: {
+     Authorization: `Bearer ${token}`
+    },
+    }).then((response) => { return response.json()})
+         keys  =  Object.keys(recipes);
+         console.log(recipes)
+         loading = false;
+    }catch(e){
+      console.log('error')
+    }
+})
+
 </script>
 
 <section>
@@ -41,35 +62,41 @@
         <h2>Meal Planner</h2>
         <h2>{dateHeading}</h2>
         
-            <label for="small" class="block mb-2 text-sm font-large text-gray-900 dark:text-white">Small select</label>
-            <select bind:value={apptDetails.mealType} id="small" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>Choose Meal Type</option>
-            <option value="Breakfast">Breakfast</option>
-            <option value="Lunch">Lunch</option>
-            <option value="Dinner">Dinner</option>
-            <option value="Supper">Supper</option>
+            <label for="small" class="block mb-2 text-sm font-large text-gray-900 dark:text-white">Select Meal Type</label>
+            <select bind:value={apptDetails.mealType} id="small" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+              <option selected>Choose a Choose a recipe</option>
+              <option value="Breakfast">Breakfast</option>
+              <option value="Lunch">Lunch</option>
+              <option value="Dinner">Dinner</option>
+              <option value="Supper">Supper</option>
             </select>
-            {apptDetails.mealType}
-            <label for="large" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Large select</label>
-            <select bind:value={apptDetails.meal} id="large" class="block w-full px-4 py-3 mb-6 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>Choose a country</option>
-            <option value="Kitfo">Kitfo</option>
-            <option value="Tibes">Tibes</option>
-            <option value="Burger">Burger</option>
-            <option value="choma">choma</option>
-            </select>
-
+            <label for="large" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Search for meal</label>
+                <select bind:value={apptDetails.meal} id="large" class="block w-full px-4 py-3 mb-6 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                    <option selected>Choose a Choose a recipe</option>
+                    {#if loading}
+                       <h1>Loading</h1>
+                    {:else}
+                    {#await recipes} 
+                        <h1>waiting...</h1>
+                    {:then recipes}
+                    {#each keys as recipe}
+                    <option value={recipes[recipe].name}>{recipes[recipe].name}</option>
+                    {/each}
+                    {:catch error}
+                        <p>An error occurred!</p>
+                    {/await}
+                    {/if}
+                </select>
             <div>
-				<button class="addBtn">Add</button>
-			</div>	
+				<button class="addBtn text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Add</button>
+			</div>
     </div>
-      
      <!-- component -->
 <div class="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
 	<div class="bg-white rounded shadow p-6 m-4 w-full">
         <div> 
           {#if appointments.length == 0}
-            <h1>No meal planed</h1>
+            <h1>No meal planned</h1>
           {:else}
             {#each appointments as appt}
               <Appointment mealType={appt.mealType}, meal={appt.meal} time='Null' completed={appt.completed} apptID={appt.id} {dateID}  />
@@ -166,7 +193,7 @@ ul li.checked::before {
 
 /* Style the header */
 .header {
-  background-color: #f44336;
+  background-color: #ff11005b;
   padding: 80px 40px;
   color: white;
   text-align: center;
@@ -188,24 +215,6 @@ input {
   padding: 10px;
   float: left;
   font-size: 16px;
-}
-
-/* Style the "Add" button */
-.addBtn {
-  padding: 10px;
-  width: 25%;
-  background: #d9d9d9;
-  color: #555;
-  float: left;
-  text-align: center;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-  border-radius: 0;
-}
-
-.addBtn:hover {
-  background-color: #bbb;
 }
 
 .close{

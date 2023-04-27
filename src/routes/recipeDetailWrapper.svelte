@@ -1,13 +1,56 @@
 <script>
-  import RecipeDetail from "./recipeDetail.svelte";
+  import axios from 'axios';
+
+
+  import FusionCharts from 'fusioncharts';
+  import Charts from 'fusioncharts/fusioncharts.charts';
+  import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+  import SvelteFC, {fcRoot} from 'svelte-fusioncharts';
+  import Widgets from 'fusioncharts/fusioncharts.widgets';
+  import dataSource from '../chart_data';
+
+  // chart
+  fcRoot(FusionCharts, Charts, FusionTheme);
+
+  let chartConfig = {
+    type: 'pie3d',
+    width: '600',
+    height: '400',
+    renderAt: 'chart-container',
+    dataSource
+  };
+
 
 export let params;
 let recipe_row = params.recipe
 let recipe = decodeURIComponent(recipe_row)
 recipe = JSON.parse(recipe)
+console.log('recipe ingredient is below')
+
+$: addShopping = async (id) => {
+    const token = localStorage.getItem('access_token')
+    const user_id = localStorage.getItem('user_id');
+    const res = await axios.post(`http://127.0.0.1:8000/recipes/shopping/${id}`, {
+       
+      }, {
+        headers: {
+             Authorization: `Bearer ${token}`
+        },
+      })
+      .then((response) => {
+          console.log(response.data);
+          // Perform any additional actions with the response data here
+      })
+      .catch((error) => {
+          console.log(error);
+          // Handle any errors that occur during the request
+      });
+};
+
+
 </script>
 
-<div class="p-4">
+<div class="pl-8 p-4 mx-auto">
 
   <div class="px-4 sm:px-0">
     <h3 class="text-base font-semibold leading-7 text-gray-900">Recipe Information</h3>
@@ -37,47 +80,42 @@ recipe = JSON.parse(recipe)
           <dt class="text-sm font-medium leading-6 text-gray-900">Collection</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{recipe.collection}</dd>
         </div>
-        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900">Picture</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{recipe.picture}</dd>
+        
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">ingredients</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+              {#each recipe.ingredients as ingredient}
+                <li class="container py-2 flex justify-between">
+                    {ingredient.name}
+                    <div on:click|preventDefault={addShopping(ingredient.id)}>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                    </svg>
+                    </div>
+                </li>
+              {/each}  
+            </ul>  
+          </dd>
+       </div>
+       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm font-medium leading-6 text-gray-900">Cooking Steps</dt>
+        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <ol class="max-w-md space-y-1 text-gray-500 list-decimal list-inside dark:text-gray-400">            {#each recipe.steps as step}
+              <li class="py-2">
+                  {step.description}
+              </li>
+            {/each}  
+          </ol>  
+        </dd>
+     </div>
+
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"> 
+            <SvelteFC {...chartConfig} />
         </div>
+
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
           <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Delete Recipe</button>
-        </div>
-        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900">Attachments</dt>
-          <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-            <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
-              <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                <div class="flex w-0 flex-1 items-center">
-                  <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z" clip-rule="evenodd" />
-                  </svg>
-                  <div class="ml-4 flex min-w-0 flex-1 gap-2">
-                    <span class="truncate font-medium">resume_back_end_developer.pdf</span>
-                    <span class="flex-shrink-0 text-gray-400">2.4mb</span>
-                  </div>
-                </div>
-                <div class="ml-4 flex-shrink-0">
-                  <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Download</a>
-                </div>
-              </li>
-              <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                <div class="flex w-0 flex-1 items-center">
-                  <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z" clip-rule="evenodd" />
-                  </svg>
-                  <div class="ml-4 flex min-w-0 flex-1 gap-2">
-                    <span class="truncate font-medium">coverletter_back_end_developer.pdf</span>
-                    <span class="flex-shrink-0 text-gray-400">4.5mb</span>
-                  </div>
-                </div>
-                <div class="ml-4 flex-shrink-0">
-                  <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Download</a>
-                </div>
-              </li>
-            </ul>
-          </dd>
         </div>
       </dl>
     </div>
