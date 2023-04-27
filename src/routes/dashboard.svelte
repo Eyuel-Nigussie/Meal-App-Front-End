@@ -11,21 +11,31 @@ import dataSource from '../chart_data';
 
 fcRoot(FusionCharts, Charts, FusionTheme);
 
-const chartConfigss = {
+const chartConfigs = {
   type: 'column2d',
-  width: '600',
-  height: '400',
+  width: '500',
+  height: '500',
   dataFormat: 'json',
   dataSource
 };
 
-let chartConfig = {
-    type: 'spline',
-    width: '600',
-    height: '400',
-    renderAt: 'chart-container',
-    dataSource
-  };
+let chartObj,
+    chartConfig = {
+      id: 'column-chart',
+      type: 'column2d',
+      width: '600',
+      height: '350',
+      renderAt: 'chart-container',
+      dataSource
+    };
+    let chartObjz,
+    chartConfigz = {
+      type: 'pie2d',
+      width: '600',
+      height: '400',
+      renderAt: 'chart-container',
+      dataSource 
+    };
 
 
 	let uid = 1;
@@ -69,9 +79,13 @@ onMount( async () => {
 
 <div id="board p-5">
   <div class="max-w-[36em] mx-auto">
-    <SvelteFC {...chartConfigss} />
-    <SvelteFC {...chartConfig} />
+    <SvelteFC {...chartConfigs} />
+    <SvelteFC {...chartConfig} bind:chart={chartObj} />
+    <SvelteFC {...chartConfigz} bind:chart={chartObjz} />
+
   </div>
+  
+  
   <!-- ================================================== -->
   <div class='grid grid-cols-2 gap-2 md:gap-5 max-w-[44em] mx-auto p-5 bg-red-50'>
     <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900  dark:text-white">Shopping <span class="text-red-600 dark:text-blue-500">List</span></h1>  
