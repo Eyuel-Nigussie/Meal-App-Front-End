@@ -47,6 +47,22 @@ $: addShopping = async (id) => {
       });
 };
 
+async function deleteRecipe(id) {
+  const token = localStorage.getItem('access_token')
+  const response = await fetch(`http://localhost:8000/recipes/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+  });
+  if (response.ok) {
+    const data = await response.json();
+    console.log('Recipe deleted:', data);
+  } else {
+    console.error('Error deleting recipe:', response.statusText);
+  }
+}
 
 </script>
 
@@ -115,7 +131,7 @@ $: addShopping = async (id) => {
         </div>
 
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Delete Recipe</button>
+          <button on:click|preventDefault={deleteRecipe (recipe.id)} type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Delete Recipe</button>
         </div>
       </dl>
     </div>
