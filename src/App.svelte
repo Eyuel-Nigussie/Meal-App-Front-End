@@ -20,7 +20,6 @@
   import NotFound from './routes/notfound.svelte'
   import Fetch from './routes/fetchPractice.svelte'
   import Router from 'svelte-spa-router' 
-  
 let routes = {
   "/": Login,
   "/recipes": Recipes,
