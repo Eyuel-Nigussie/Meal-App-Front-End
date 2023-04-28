@@ -77,10 +77,10 @@ $: addRecipe = async () => {
 </script>
 
 
-<div class="mb-20">
+<div class="mb-20 px-4">
 <form class="w-full mx-auto max-w-lg mb-10" on:submit|preventDefault={addRecipe}>
     <div class="flex flex-wrap -mx-3 mb-6">
-      <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Add <span class="text-red-600 dark:text-blue-500">Recipes</span></h1>  
+      <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">Add <span class="text-red-600 dark:text-red-500">Recipes</span></h1>  
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full px-3">
