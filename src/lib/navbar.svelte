@@ -14,12 +14,12 @@
 <!-- mobile hamburger menu-->
 <section class="md:hidden">
     <div id="mySidenav" class="sidenav">
-      <ul class="space-y-2 font-medium">
-        <a href="javascript:void(0)" class="closebtn" on:click={closeNav}>&times;</a> 
+       <ul class="space-y-2 font-medium">
+        <a href="javascript:void(0)" class="closebtn" on:click={closeNav}>&times;</a>
         <!-- <a href="#">About</a>
         <a href="#">Services</a>
         <a href="#">Clients</a>
-        <a href="#">Contact</a> -->  
+        <a href="#">Contact</a> -->
         <li class="sidebar-list">
           <a href="#" class="items-center text-gray-900 hover:text-black rounded-lg dark:text-white  flex row">
             
@@ -48,7 +48,7 @@
           <a href="#/about" class="items-center text-gray-900 hover:text-black rounded-lg dark:text-white flex row">
             
               <span class="flex row"> <svg aria-hidden="true" class="w-8 h-8  pt-2  pr-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                 <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
               </svg>PROFILE</span>
           </a>
         </li>
@@ -60,7 +60,47 @@
               </svg>ABOUT</span>
           </a>
         </li>
-    </ul>
+    </ul> 
+    <form action="#" class="my-6">
+      <div class="mb2 pr-1">
+         <label for="email" class="block mb-2 text-sm font-medium text-white">Your email</label>
+         <input type="email" id="email" class="bg-red-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mx-2" placeholder="name@company.com" required>
+      </div>
+      <div class="mb-2">
+         <label for="subject" class="block mb-2 text-sm font-medium text-white">Subject</label>
+         <input type="text" id="subject" class="bg-red-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Let us know how we can help you" required>
+      </div>
+      <div class="mb-2">
+         <label for="message" class="block mb-2 text-sm font-medium text-white">Your message</label>
+         <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-red-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Your message..."></textarea>
+      </div>
+      <!-- <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">LOGIN</button> -->
+      
+      <button type="submit" class="w-full text-white hover:text-white border-red-200 bg-blue-400 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">LOGIN</button>
+   </form>
+
+ <!--    <ul class="space-y-2 font-medium">       
+         <li>
+            <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                  <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
+                  <span class="flex-1 ml-3 text-left whitespace-nowrap">E-commerce</span> -->
+                    <!-- <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> -->
+        <!--    </button>
+         </li>
+         <li>
+          <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
+                <span class="flex-1 ml-3 text-left whitespace-nowrap">E-commerce</span>
+          </button>
+       </li>
+       <li>
+        <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+              <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
+              <span class="flex-1 ml-3 text-left whitespace-nowrap">E-commerce</span>
+        </button>
+     </li>
+         
+      </ul> -->
     </div>
       <div id="main">
         <div class="navy py-[-20px] mt-0 h-30" style="font-size:30px;cursor:pointer" on:click={openNav}>
@@ -139,7 +179,7 @@ body {
   padding-top: 60px;
 }
 .navmain{
-  background-color: #6e000015;
+  background-color: #27000088;
 }
 
 .sidenav a {
@@ -194,7 +234,7 @@ body {
 }
 
 .sidebar-list{
-  background-color: rgba(44, 0, 0, 0.583);
+  background-color: rgba(254, 125, 125, 0.85);
   border-radius: 15px;
 }
 </style> 
