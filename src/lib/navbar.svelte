@@ -72,8 +72,8 @@
 
 <!-- nav for big size -->
 <section class="hidden md:block">
-<nav class="bg-white border-gray-200">
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+<nav class="hidden md:block bg-white border-gray-200">
+  <div class="max-w-screen-xl flex flex-nowrap items-center justify-between mx-auto p-4">
   <a href="/#/download" class="flex items-center">
     <img
     src="https://www.linkpicture.com/q/Meal_Planner-removebg-preview_1.png"

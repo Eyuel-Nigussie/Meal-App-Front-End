@@ -43,9 +43,9 @@ onMount( async () => {
 
 </script>	
 <div class="md:hidden flex items-center justify-between px-2  font-large text-black">
-  <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">My <span class="text-red-600 dark:text-blue-500">Recipes</span></h1>  
+  <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">My <span class="text-red-600 dark:text-red-500">Recipes</span></h1>  
 </div>
-<h1 class="hidden md:block mb-4 pl-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">My <span class="text-red-600 dark:text-blue-500">Recipes</span></h1>  
+<h1 class="hidden md:block mb-4 pl-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">My <span class="text-red-600 dark:text-red-500">Recipes</span></h1>  
 
       {#if loading}
         <h1>Loading</h1>

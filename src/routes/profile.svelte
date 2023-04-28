@@ -44,7 +44,7 @@ onMount(async (message) => {
 
 <div class="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg mx-auto">
     <div class="px-profile4 py-5 sm:px-6">
-        <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">User <span class="text-red-600 dark:text-blue-500">Info</span></h1>  
+        <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">User <span class="text-red-600">Info</span></h1>  
 
         <p class="mt-1 max-w-2xl text-sm text-gray-500">
             Details and informations about you
