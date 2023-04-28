@@ -44,16 +44,12 @@
        <input type="hidden" name="remember" value="true">
        <div class="rounded-md shadow-sm">
          <div class="my-4">
-               <label for="email-address" class="sr-only">Email address</label>
+               <h2>Email</h2>
                <input bind:value={myusername} id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full rounded-t-md border-0 py-1.5 my-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Email address">
-               <h2>email</h2>
-               <h2>{myusername}</h2>
         </div>
          <div class="my-4">
-               <label for="password" class="sr-only">Password</label>
+              <h2>Password</h2>
                <input bind:value={mypassword} id="password" name="password" type="password" autocomplete="current-password" required class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Password">
-               <h2>Password</h2>
-               <h2>{mypassword}</h2>
          </div>
          
        </div>
