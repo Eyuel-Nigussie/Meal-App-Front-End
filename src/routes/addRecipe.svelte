@@ -2,7 +2,7 @@
     import axios from 'axios';
     import { onMount } from 'svelte'; 
 	  import MultiSelect from './MultiSelect.svelte';
-  
+    import Modal from '../lib/Modal.svelte';
 
   let name = '', description = '', cooking_time = '', collection = '', picture= '', ingredient_ids = [], steps= ''
   let keys
@@ -12,6 +12,9 @@
   
 let ingredients = [] 
 let stepz = []
+
+let message = '';
+let messageLoading = true;
 
 const token = localStorage.getItem('access_token')
 onMount( async () => {
@@ -25,7 +28,8 @@ onMount( async () => {
          keys  =  Object.keys(ingredients);
          loading = false;
     }catch(e){
-      console.log('getting ingredients error: ' + e.message)
+            message = e
+            messageLoading = false;
     }
 })
 
@@ -70,7 +74,6 @@ $: addRecipe = async () => {
              Authorization: `Bearer ${token}`
         },
       });
-      // console.log(res)
   };
 
  // const token_is = res.data.headers['Content-Type']; // text/json
@@ -82,6 +85,12 @@ $: addRecipe = async () => {
     <div class="flex flex-wrap -mx-3 mb-6">
       <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">Add <span class="text-red-600 dark:text-red-500">Recipes</span></h1>  
     </div>
+    <div class="pl-8 p-4 mx-auto">
+    {#if messageLoading}
+      <p>loading...</p>
+    {:else}
+    <Modal {message} />
+    {/if}
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full px-3">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
@@ -109,13 +118,12 @@ $: addRecipe = async () => {
             {#if loading}
               <h1>Loading</h1>
             {:else}
-            {value}
-            <MultiSelect id='lang' bind:value>
-                <option value=''></option>
-              {#each ingredients as ingredient, i}
-                <option value={ingredient.id}>{ingredient.name}</option>
-              {/each}
-           </MultiSelect> 
+              <MultiSelect id='lang' bind:value>
+                  <option value=''></option>
+                {#each ingredients as ingredient, i}
+                  <option value={ingredient.id}>{ingredient.name}</option>
+                {/each}
+              </MultiSelect> 
             {/if}
             
         </div>
@@ -177,20 +185,22 @@ $: addRecipe = async () => {
         </label>
         <input bind:value={collection} class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="recipe collection catagory">
       </div>
-      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
-          Picture Link
-        </label>
-        <input bind:value={picture} class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="Picture Link">
-      </div>
-      <div class="flex flex-wrap -mx-3 mb-6">
+      <!-- <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full px-3">
           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="large_size">Large file input</label>
           <input class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="large_size" type="file">        
           </div>
+      </div> -->
+    </div>
+    <div class="flex flex-wrap -mx-3 mb-6">
+      <div class="w-full px-3">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+          Picture Link
+        </label>
+        <input bind:value={picture} class="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="dr. abiy ( ye emama fishka)">
+        <p class="text-gray-600 text-xs italic">For Now Give me the link</p>
       </div>
     </div>
-   
     <button class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
       save
     </button>

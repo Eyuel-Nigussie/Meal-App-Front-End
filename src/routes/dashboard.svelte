@@ -7,8 +7,8 @@
   import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
   import SvelteFC, {fcRoot} from 'svelte-fusioncharts';
   import dataSource from '../chart_data.js';
-
-
+  
+  import Modal from '../lib/Modal.svelte';
   //============ chart ==================
   fcRoot(FusionCharts, Charts, FusionTheme);
 
@@ -47,6 +47,9 @@ let chartConfig = {
 	];
 
 
+  // Fetch recipes
+  let message = '';
+  let messageLoading = true;
 onMount(async () => {
   const token = localStorage.getItem('access_token');
 
@@ -71,8 +74,6 @@ onMount(async () => {
     console.log('Error fetching ingredients:', error);
     }
 
-  // Fetch recipes
-
   try {
     recipes = await fetch('http://127.0.0.1:8000/recipes', {
       method: 'GET',
@@ -80,64 +81,26 @@ onMount(async () => {
         Authorization: `Bearer ${token}`
       },
     }).then((response) => response.json());
-      recipeKeys = Object.keys(recipes);
-      // console.log(recipes);
+       recipeKeys = Object.keys(recipes);
+       // console.log(recipes);
+       message = 'success';
+       messageLoading = false;
       recipesLoading = false;
   } catch (error) {
-    console.log('Error fetching recipes:', error);
+    message = error.message;
+    messageLoading = false;
   }
 });
 
-
-  // onMount( async () => {
-  //   let ingridients
-  //   const token = localStorage.getItem('access_token') 
-  //   let loading = true
-  // try{
-  //   ingridients = await fetch('http://127.0.0.1:8000/recipes/shopping',{
-  //   method:  'GET',
-  //   headers: {
-  //    Authorization: `Bearer ${token}`
-  //   },
-  //   }).then((response) => { return response.json()})
-  //       //  keys  =  Object.keys(recipes);
-  //        console.log(ingridients)
-  //        loading = false;
-  //   }catch(e){
-  //     console.log('error')
-  //   }
-  // })
-
-
-	
 const todos = createTodos(initialTodos)
-
-
-//*********** recipes preferences
-// import {onMount} from 'svelte'
-// onMount( async () => {
-//   const token = localStorage.getItem('access_token') 
-//   let recipes   //store the recipes from db
-// let keys
-// let loading = true
-//   try{
-//     recipes = await fetch('http://127.0.0.1:8000/recipes',{
-//     method:  'GET',
-//     headers: {
-//      Authorization: `Bearer ${token}`
-//     },
-//     }).then((response) => { return response.json()})
-//          keys  =  Object.keys(recipes);
-//          console.log(recipes)
-//          loading = false;
-//     }catch(e){
-//       console.log('error')
-//     }
-// })
-
 
 </script>
 <!-- ================================================== -->
+{#if messageLoading}
+  <p>loading...</p>
+{:else}
+<Modal {message} />
+{/if}
 <div id="container" class="md:ml-48 lg:ml-[420PX] pb-12">
   <SvelteFC {...chartConfigs} class="mx-auto"/>  
   <SvelteFC {...chartConfig} />

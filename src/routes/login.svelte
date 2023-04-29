@@ -6,7 +6,7 @@
   Cookies.set('auth', 'my-auth-token', { sameSite: "None", secure: true})
 
   let myusername = '', mypassword = '';
-
+  export let location;
   const submit = async () => {
     const formData = new FormData(); 
     formData.append('username', myusername); 

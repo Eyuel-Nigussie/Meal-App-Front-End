@@ -1,4 +1,20 @@
 <script>
+    import { onMount } from 'svelte';
+
+    let isAuthenticated = false;
+
+    function logout() {
+    localStorage.removeItem('access_token');
+    window.location.href = '/login';
+   }
+
+   onMount(() => {
+    const token = localStorage.getItem('access_token')
+    if (token) {
+      isAuthenticated = true;
+    }
+  });
+
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
       document.getElementById("main").style.marginLeft = "250px";
@@ -129,7 +145,12 @@
       </div>
       <input type="text" id="search-navbar" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search...">
     </div> -->
-    <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">LOGIN</button>
+    {#if isAuthenticated}
+          <button type="button" on:click={logout} class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">LOGOUT</button>
+    {:else}
+        <a href="/login" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">LOGIN</a>
+    {/if}
+
   </div>
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
       <!-- <div class="relative mt-3 md:hidden">
@@ -234,7 +255,7 @@ body {
 }
 
 .sidebar-list{
-  background-color: rgba(254, 125, 125, 0.85);
+  background-color: rgba(55, 1, 1, 0.637);
   border-radius: 15px;
 }
 </style> 
