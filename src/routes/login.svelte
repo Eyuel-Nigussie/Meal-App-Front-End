@@ -2,11 +2,13 @@
   import axios from 'axios';
   import {push} from 'svelte-spa-router'
   import Cookies from 'js-cookie'
+  import Modal from '../lib/Modal.svelte';
 
   Cookies.set('auth', 'my-auth-token', { sameSite: "None", secure: true})
 
   let myusername = '', mypassword = '';
-  export let location;
+  let message = '';
+  let messageLoading = true;
   const submit = async () => {
     const formData = new FormData(); 
     formData.append('username', myusername); 
@@ -20,15 +22,23 @@
         (response) => { 
                         localStorage.setItem('access_token', response.data.access_token);
                         localStorage.setItem('user_id', response.data.user.id);
-                        push('/profile');
+                        message = 'success';
+                        messageLoading = false;
+                        push('/dashboard');
                       }
         
        ) 
-       .catch((error) => { console.error(error); });
+       .catch((error) => { 
+             message = error.message;
+             messageLoading = false;
+         });
   }
 </script>
 
-
+{#if messageLoading}
+{:else}
+<Modal {message} />
+{/if}
 <div class="flex min-h-full items-center justify-center px-4 py-6 sm:px-6 lg:px-8 mb-20 -mt-20">
    <div class="w-full max-w-md">
      <div>
