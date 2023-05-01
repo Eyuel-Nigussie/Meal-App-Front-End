@@ -1,10 +1,15 @@
 <script>
 // @ts-nocheck
 import {onMount} from 'svelte'
+import {push} from "svelte-spa-router"
+import Modal from '../lib/Modal.svelte';
+
 let recipes   //store the recipes from db
 let keys
 let loading = true
 const token = localStorage.getItem('access_token') 
+let message = '';
+  let messageLoading = true;
 
 onMount( async () => {
   try{
@@ -17,6 +22,7 @@ onMount( async () => {
          keys  =  Object.keys(recipes);
          console.log(recipes)
          loading = false;
+         push('/recipes')
     }catch(e){
       console.log('error')
     }
@@ -46,6 +52,12 @@ onMount( async () => {
   <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">My <span class="text-red-600 dark:text-red-500">Recipes</span></h1>  
 </div>
 <h1 class="hidden md:block mb-4 pl-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">My <span class="text-red-600 dark:text-red-500">Recipes</span></h1>  
+<!-- svelte-ignore empty-block -->
+{#if messageLoading}
+
+{:else}
+<Modal {message} />
+{/if}
 
       {#if loading}
         <h1>Loading</h1>
@@ -124,7 +136,7 @@ onMount( async () => {
               {recipes[recipe].description}
             </p>
             <a
-              href="/#/recipe/{recipes[recipe].id}"
+              href="/#/recipe/{encodeURIComponent(JSON.stringify(recipes[recipe]))}"
               class="text-body-color hover:border-primary hover:bg-red-600 inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
             >
               View Details
@@ -132,122 +144,6 @@ onMount( async () => {
           </div>
         </div>
       </div>
-      <!-- <div class="w-full px-4 md:w-1/2 xl:w-1/3">
-        <div class="mb-10 overflow-hidden rounded-lg bg-white">
-          <img
-            src={recipes[recipe].picture}
-            alt="image"
-            class="w-full"
-          />
-          <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
-            <h3>
-              <a
-                href="javascript:void(0)"
-                class="text-dark hover:text-primary mb-4 bloc text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
-              >
-              {recipes[recipe].name}
-              </a>
-            </h3>
-            <p class="text-body-color mb-7 text-base leading-relaxed">
-              Lorem ipsum dolor sit amet pretium consectetur adipiscing elit.
-              Lorem consectetur adipiscing elit.
-            </p>
-            <a
-              href="javascript:void(0)"
-              class="text-body-color hover:border-primary hover:bg-slate-800 inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
-            >
-              View Details
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="w-full px-4 md:w-1/2 xl:w-1/3">
-        <div class="mb-10 overflow-hidden rounded-lg bg-white">
-          <img
-            src="https://qph.cf2.quoracdn.net/main-qimg-743c8bb884248984a26db5eea6df3756-pjlq"
-            alt="image"
-            class="w-full"
-          />
-          <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
-            <h3>
-              <a
-                href="/#/recipe/23"
-                class="text-dark hover:text-primary mb-4 block text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
-              >
-                Kurt sega
-              </a>
-            </h3>
-            <p class="text-body-color mb-7 text-base leading-relaxed">
-              Lorem ipsum dolor sit amet pretium consectetur adipiscing elit.
-              Lorem consectetur adipiscing elit.
-            </p>
-            <a
-              href="/#/recipe/22"   
-              class="text-body-color hover:border-primary hover:bg-slate-800 inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
-            >
-              View Details
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="w-full px-4 md:w-1/2 xl:w-1/3">
-        <div class="mb-10 overflow-hidden rounded-lg bg-white">
-          <img
-            src="https://cdn-bmalj.nitrocdn.com/uirOOtSrYrqqUksKHkiSCjZGZlPeXsmk/assets/static/optimized/rev-939cb5a/images/German-food-Potato-Salad.jpg"
-            alt="image"
-            class="w-full"
-          />
-          <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
-            <h3>
-              <a
-                href="javascript:void(0)"
-                class="text-dark hover:text-primary mb-4 block text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
-              >
-                Creative Card Component designs graphic elements
-              </a>
-            </h3>
-            <p class="text-body-color mb-7 text-base leading-relaxed">
-              Lorem ipsum dolor sit amet pretium consectetur adipiscing elit.
-              Lorem consectetur adipiscing elit.
-            </p>
-            <a
-              href="/#/recipe/25"
-              class="text-body-color hover:border-primary hover:bg-red-500 inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
-            >
-              View Details
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="w-full px-4 md:w-1/2 xl:w-1/3">
-        <div class="mb-10 overflow-hidden rounded-lg bg-white">
-          <img
-            src="https://qph.cf2.quoracdn.net/main-qimg-520dc22ab50d48efc30ba0e2e1df8fb5-pjlq"
-            alt="image"
-            class="w-full"
-          />
-          <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
-            <h3>
-              <a
-                href="javascript:void(0)"
-                class="text-dark hover:text-primary mb-4 block text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
-              >
-                Creative Card Component designs graphic elements
-              </a>
-            </h3>
-            <p class="text-body-color mb-7 text-base leading-relaxed">
-              Lorem ipsum dolor sit amet pretium consectetur adipiscing elit.
-              Lorem consectetur adipiscing elit.
-            </p>
-            <a
-              href="javascript:void(0)"
-              class="text-body-color hover:border-primary hover:bg-slate-800 inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
-            >
-              View Details
-            </a>
-          </div>
-        </div>
-      </div>       -->
 {/each}
      </div>
    </div>
