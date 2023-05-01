@@ -1,6 +1,6 @@
 <script>
   import axios from 'axios';
-
+  import { push } from 'svelte-spa-router';
 
   import FusionCharts from 'fusioncharts';
   import Charts from 'fusioncharts/fusioncharts.charts';
@@ -42,10 +42,12 @@ let messageLoading = true;
         .then((response) => {
             message = response.statusText
             messageLoading = false;
+            console.log(response.statusText)
         })
         .catch((error) => {
             message = error
             messageLoading = false;
+            console.log(error)
         });
   };
 
@@ -61,6 +63,7 @@ let messageLoading = true;
 
     message = res.statusText
     messageLoading = false;
+    console.log(res.statusText)
   } catch (error) {
     message = error
     messageLoading = false;
@@ -84,9 +87,14 @@ async function deleteRecipe(id) {
     const data = await response.json();
     message = data;
     messageLoading = false;
+    push('/recipes')
+    message = data;
+    messageLoading = false;
+    console.log(response.statusText)
   } else {
     message = response.statusText;
     messageLoading = false;
+    console.log(response.statusText)
   }
 }
 
@@ -94,7 +102,6 @@ async function deleteRecipe(id) {
 
 <div class="pl-8 p-4 mx-auto">
   {#if messageLoading}
-  <p>loading...</p>
 {:else}
 <Modal {message} />
 {/if}
