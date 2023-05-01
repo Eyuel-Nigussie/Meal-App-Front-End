@@ -3,7 +3,7 @@
     import { onMount } from 'svelte'; 
 	  import MultiSelect from './MultiSelect.svelte';
     import Modal from '../lib/Modal.svelte';
-
+    import {push} from 'svelte-spa-router'
   let name = '', description = '', cooking_time = '', collection = '', picture= '', ingredient_ids = [], steps= ''
   let keys
   let loading = true
@@ -17,6 +17,8 @@ let message = '';
 let messageLoading = true;
 
 const token = localStorage.getItem('access_token')
+const user_id = localStorage.getItem('user_id');
+
 onMount( async () => {
   try{
     ingredients = await fetch('http://127.0.0.1:8000/ingredients',{
@@ -27,9 +29,11 @@ onMount( async () => {
     }).then((response) => { return response.json()})
          keys  =  Object.keys(ingredients);
          loading = false;
+         console.log(response.jsonn)
     }catch(e){
             message = e
             messageLoading = false;
+            console.log(e)
     }
 })
 
@@ -53,30 +57,40 @@ let values=[{
 $:  stepz = values
 $: console.log(stepz)
 $:  ingredient_ids =value
-$: addRecipe = async () => {
-    const token = localStorage.getItem('access_token')
-    const user_id = localStorage.getItem('user_id');
-    const res = await axios.post('http://127.0.0.1:8000/recipes/recipes', {
-        // 
-        // // ingredient_ids
-           name,
-           description,
-           cooking_time,
-           collection,
-           picture,
-          "user_id": user_id,
-          "ingredient_ids": ingredient_ids,
-          "quantities": [500, 200, 1],
-          "units": ["g", "g", "can"],
-          "steps": stepz
-      }, {
-        headers: {
-             Authorization: `Bearer ${token}`
-        },
-      });
-  };
 
- // const token_is = res.data.headers['Content-Type']; // text/json
+   $: addRecipe = async () => {
+          const token = localStorage.getItem('access_token')
+          const user_id = localStorage.getItem('user_id');
+      try {
+          const res = await axios.post('http://127.0.0.1:8000/recipes', {
+              // 
+              // // ingredient_ids
+                name,
+                description,
+                cooking_time,
+                collection,
+                picture,
+                "user_id": user_id,
+                "ingredient_ids": ingredient_ids,
+                "quantities": [500, 200, 1,120, 22, 12, 500, 200, 1, 120, 22, 12],
+                "units": ["g", "g", "can", "kg", "can", "tsp", "g", "g", "can", "kg", "can", "tsp"],
+                "steps": stepz
+            }, {
+              headers: {
+                  Authorization: `Bearer ${token}`
+              },
+            })
+            message = res
+            messageLoading = false;
+            console.log(res)
+            push('/recipes')
+       }           
+       catch(error) {
+            console.log(error)
+            message = e
+            messageLoading = false;
+        }
+}
 </script>
 
 
@@ -87,7 +101,6 @@ $: addRecipe = async () => {
     </div>
     <div class="pl-8 p-4 mx-auto">
     {#if messageLoading}
-      <p>loading...</p>
     {:else}
     <Modal {message} />
     {/if}
@@ -108,7 +121,7 @@ $: addRecipe = async () => {
         <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
       </div>
     </div>
-    
+   
     <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full px-3">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
@@ -179,12 +192,12 @@ $: addRecipe = async () => {
           </div>
         </div>
       </div> -->
-      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+      <!-- <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
           Collection
         </label>
         <input bind:value={collection} class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="recipe collection catagory">
-      </div>
+      </div> -->
       <!-- <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full px-3">
           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="large_size">Large file input</label>
@@ -192,6 +205,15 @@ $: addRecipe = async () => {
           </div>
       </div> -->
     </div>
+    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select a Collection</label>
+    <select bind:value={collection} id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm mb-2 rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500">
+        <option selected>Choose a catagory</option>
+        <option value="Breakfast">Breakfast</option>
+        <option value="Lunch">Lunch</option>
+        <option value="Supper">Supper</option>
+        <option value="Dinner">Dinner</option>
+    </select>
+
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full px-3">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
