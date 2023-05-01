@@ -1,6 +1,6 @@
 export default {
     "chart": {
-      "caption": "Nordstorm's Customer Satisfaction Score for 2017",
+      "caption": "Weakly Calorie Intake",
       "lowerLimit": "0",
       "upperLimit": "100",
       "showValue": "1",
