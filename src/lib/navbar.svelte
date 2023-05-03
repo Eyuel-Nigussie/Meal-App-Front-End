@@ -37,7 +37,7 @@
         <a href="#">Clients</a>
         <a href="#">Contact</a> -->
         <li class="sidebar-list">
-          <a href="#" class="items-center text-gray-900 hover:text-black rounded-lg dark:text-white  flex row">
+          <a href="/#/dashboard" class="items-center text-gray-900 hover:text-black rounded-lg dark:text-white  flex row">
             
               <span class="flex row"> <svg aria-hidden="true" class="w-8 h-8  pt-2  pr-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
@@ -45,15 +45,15 @@
           </a>
         </li>
         <li class="sidebar-list">
-          <a href="#" class="items-center text-gray-900 hover:text-black rounded-lg dark:text-white flex row">
+          <a href="/#/recipes" class="items-center text-gray-900 hover:text-black rounded-lg dark:text-white flex row">
   
               <span class="flex row"> <svg aria-hidden="true" class="w-8 h-8  pt-2  pr-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-              </svg>RECIPE</span>
+              </svg>RECIPES</span>
           </a>
         </li>
         <li class="sidebar-list">
-          <a href="#/about" class="items-center text-gray-900 hover:text-black rounded-lg dark:text-white flex row">
+          <a href="/#/addrecipe" class="items-center text-gray-900 hover:text-black rounded-lg dark:text-white flex row">
             
               <span class="flex row"> <svg aria-hidden="true" class="w-8 h-8  pt-2  pr-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
@@ -61,7 +61,15 @@
           </a>
         </li>
         <li class="sidebar-list">
-          <a href="#/about" class="items-center text-gray-900 hover:text-black rounded-lg dark:text-white flex row">
+          <a href="/#/planner" class="items-center text-gray-900 hover:text-black rounded-lg dark:text-white flex row">
+            
+              <span class="flex row"> <svg aria-hidden="true" class="w-8 h-8  pt-2  pr-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+              </svg>Planner</span>
+          </a>
+        </li>
+        <li class="sidebar-list">
+          <a href="/#/profile" class="items-center text-gray-900 hover:text-black rounded-lg dark:text-white flex row">
             
               <span class="flex row"> <svg aria-hidden="true" class="w-8 h-8  pt-2  pr-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                  <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
@@ -69,13 +77,32 @@
           </a>
         </li>
         <li class="sidebar-list">
-          <a href="#/about" class="items-center text-gray-900 hover:text-black rounded-lg dark:text-white flex row">
+          <a href="/#/about" class="items-center text-gray-900 hover:text-black rounded-lg dark:text-white flex row">
             
               <span class="flex row"> <svg aria-hidden="true" class="w-8 h-8  pt-2  pr-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
               </svg>ABOUT</span>
           </a>
         </li>
+        {#if isAuthenticated}
+        <li class="sidebar-list">
+          <a on:click={logout} class="items-center text-gray-900 hover:text-black rounded-lg dark:text-white flex row">
+            
+              <span class="flex row"> <svg aria-hidden="true" class="w-8 h-8  pt-2  pr-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+              </svg>LOGOUT</span>
+          </a>
+        </li>
+        {:else}
+          <li class="sidebar-list">
+            <a href="/#/login" class="items-center text-gray-900 hover:text-black rounded-lg dark:text-white flex row">
+              
+                <span class="flex row"> <svg aria-hidden="true" class="w-8 h-8  pt-2  pr-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                </svg>LOGIN</span>
+            </a>
+          </li>
+        {/if}
     </ul> 
     <form action="#" class="my-6">
       <div class="mb2 pr-1">
@@ -91,8 +118,9 @@
          <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-red-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Your message..."></textarea>
       </div>
       <!-- <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">LOGIN</button> -->
-      
-      <button type="submit" class="w-full text-white hover:text-white border-red-200 bg-blue-400 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">LOGIN</button>
+      <div class="bg-red-500">
+        <button type="submit" class="w-full text-white hover:text-white border-red-200 bg-blue-400 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-12">SEND</button>
+      </div>
    </form>
 
  <!--    <ul class="space-y-2 font-medium">       
@@ -135,7 +163,7 @@
     src="https://www.linkpicture.com/q/Meal_Planner-removebg-preview_1.png"
     alt="image"
     class="h-36 w-full"/>
-      <span class="self-center text-md px-2 font-semibold whitespace-nowrap dark:text-white"> Amref Meal Planner</span>
+      <!-- <span class="self-center text-md px-2 font-semibold whitespace-nowrap dark:text-white"> Amref Meal Planner</span> -->
   </a>
   <div class="flex md:order-2">
     <!-- <div class="relative hidden md:block">
@@ -164,10 +192,13 @@
           <a href="/#/dashboard" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">DASHBOARD</a>
         </li>
         <li>
-          <a href="/#/recipes/" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-black  dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700">RECIPE</a>
+          <a href="/#/recipes/" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-black  dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700">RECIPES</a>
         </li>
         <li>
           <a href="/#/addrecipe" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 dark:text-black md:dark:hover:text-red-500 dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700">ADD RECIPE</a>
+        </li>
+        <li>
+          <a href="/#/planner" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 dark:text-black md:dark:hover:text-bred500 dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700">PLANNER</a>
         </li>
         <li>
           <a href="/#/profile" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 dark:text-black md:dark:hover:text-bred500 dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700">PROFILE</a>
@@ -175,6 +206,8 @@
         <li>
           <a href="/#/about" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 dark:text-black md:dark:hover:text-red-500 dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700">ABOUT</a>
         </li>
+        
+
       </ul>
     </div>
   </div>
@@ -194,7 +227,7 @@ body {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #27000088;
+  background-color: #42000070;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -255,7 +288,7 @@ body {
 }
 
 .sidebar-list{
-  background-color: rgba(55, 1, 1, 0.637);
+  background-color: rgba(153, 84, 84, 0.637);
   border-radius: 15px;
 }
 </style> 
