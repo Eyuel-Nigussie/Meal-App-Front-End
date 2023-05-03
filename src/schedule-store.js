@@ -1,11 +1,11 @@
+//schedule
 import {writable} from 'svelte/store'
 
 const storeInBrowser = (key, data) => {
    const dataAsString = localStorage.getItem(key)
-   console.log('this are storage from local storage')
-   console.log(dataAsString)
+//    console.log('this are storage from local storage')
    const dataAsObj = dataAsString ? JSON.parse(dataAsString) : data;
-
+//    console.log(dataAsObj)
    const svelteStore = writable(dataAsObj, () =>{
     const unsubscribe = svelteStore.subscribe(currDataState => {
         localStorage.setItem(key, JSON.stringify(currDataState))
